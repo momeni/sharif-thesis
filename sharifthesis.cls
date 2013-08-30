@@ -26,7 +26,7 @@
 \sloppy\parindent1.5em
 
 
-\newcommand{\PrepareForMainContent}{\mainmatter\pagestyle{ThesisPagestyle}
+\newcommand{\PrepareForMainContent}{\cleardoubleemptypage\pagestyle{ThesisPagestyle}\mainmatter%
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter:~##1}{}}
 \renewcommand{\sectionmark}[1]{\markright{بخش~\thesection:~##1}}}
 
