@@ -320,6 +320,12 @@
 
 %abbreviation support may be added here...
 
+\eqcommand{رچ}{rl}
+\eqcommand{چر}{lr}
+
+\eqcommand{بارهها}{itemize}
+\eqcommand{باره}{item}
+
 \eqcommand{نوواژه}{newterm}
 \eqcommand{واژه}{term}
 \eqcommand{ترجمه}{trans}
