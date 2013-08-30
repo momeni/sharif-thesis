@@ -1,0 +1,142 @@
+%\documentclass[MScThesis,twoside]{sharifthesis}
+%\documentclass[MScThesis,oneside]{sharifthesis}
+\documentclass[PhDThesis,twoside]{sharifthesis}
+%\documentclass[PhDThesis,oneside]{sharifthesis}
+
+%\def\enSubject{Master of Science Thesis (Information Technology Major), Computer Engineering Department, Sharif University of Technology, Tehran, I. R. Iran}
+\def\enSubject{Doctor of Philosophy Thesis (Information Technology Major), Computer Engineering Department, Sharif University of Technology, Tehran, I. R. Iran}
+
+\def\enTitle{Title of thesis (prefer one-line titles)}
+\def\enAuthor{‌Behnam Momeni}
+\def\enKeywords{First Key Word, Second Key Word, Final Key Word}
+
+
+\input{general/preamble}
+
+
+\newcommand{\faKeywords}{واژه‌ی کلیدی نخست،
+واژه‌ی کلیدی دوم،
+واژه‌ی کلیدی پایانی}
+\eqcommand{واژه‌های‌کلیدی}{faKeywords}
+\آرم{\درج‌تصویر[scale=.7]{logo}}
+\تاریخ{شهریور ۱۳۹۲}
+\عنوان{عنوان پایان‌نامه (ترجیح بر تک‌خط بودن)}
+\نویسنده{بهنام مومنی}
+\دانشگاه{{\نستعلیق\درشت‌تر دانشگاه صنعتی شریف %
+\\[0.6cm]}
+دانشکده‌ی مهندسی کامپیوتر}
+\دانشگاه‌عادی{دانشگاه صنعتی شریف\\
+دانشکده‌ی مهندسی کامپیوتر}
+\موضوع{گرایش به زبان پارسی}
+\استادراهنما{دکتر <نام استاد راهنما>}
+%اگر استاد مشاور ندارید، خط زیر را comment کنید
+%همچنین، فراموش نکنید در آخر این پرونده، اطلاعات انگلیسی معادل این دستورها را هم پر کنید
+\استادمشاور{دکتر <نام استاد مشاور>} 
+
+\newcommand{\efootnote}[1]{\footnote{\lr{#1}}}
+\newcommand{\ecfootnote}[1]{}
+
+
+% ================ Correct hyphenations ================
+\hyphenation{test}
+
+
+\makeglossaries
+%\includeonly{related_works/related_works}
+%\includeonly{evaluation/evaluation}
+
+% ===== DEPRACATED AREA =====
+% Following commands are provided to make older documents compilable.
+% These commands are depracated and should not be used in new documents.
+\newcommand{\ترجمه‌ج}[2]
+{\ترجمه[#1‌ها]{#1}{#2}}
+\newcommand{\ترجمه‌جمع}[3]
+{\ترجمه[#3]{#1}{#2}}
+\newcommand{\برگردان}[3]
+{\ترجمه{#1}{#3}\زیرنویس{#2}}
+\eqcommand{اسم}
+{نام}
+% ===== END OF DEPRACATED AREA =====
+
+\شروع{نوشتار}
+
+
+\newcommand{\StartDocument}{\frontmatter \baselineskip1.2\baselineskip \pagestyle{empty} \null \vfill
+\شروع{وسط‌چین}
+{\نستعلیق‌درشت بسم اللّه الرحمن الرحیم}
+\پایان{وسط‌چین}
+\vfill}
+
+\StartDocument
+\makethesistitle
+
+\pagestyle{pagenumberonlyPagestyle}
+
+\شروع{تصویب}
+%خط‌های زیر در صورت نبود استاد مدعو comment شوند
+\داور{استاد مدعو}{دکتر <نام استاد مدعو ۱>}
+\داور{استاد مدعو}{دکتر <نام استاد مدعو ۲>}
+\پایان{تصویب}
+\newpage
+
+\تقدیم{\درشت تقدیم به ...؛   صفحه‌ی تقدیم اختیاری است.} 
+
+\setlength{\baselineskip}{0.9cm}
+\begin{comment}
+\فصل*{پیش‌گفتار}
+\thispagestyle{pagenumberonlyPagestyle}
+پیشگفتار اختیاری است. در صورت تمایل به نگارش پیش‌گفتار، محیط کامنت که آن را دربرگرفته باید حذف شود.
+\end{comment}
+
+\شروع{قدردانی}
+صفحه‌ی قدردانی. این صفحه اختیاری بوده و می‌توانید آن را حذف کنید. برای این کار کافی است محیط قدردانی در پرونده‌ی تِک را حذف کنید. متداول است که در این صفحه از خانواده، استادها و همکارهای خود قدردانی نمایید.
+\پایان{قدردانی}
+
+\شروع{چکیده}{\واژه‌های‌کلیدی}
+\input{general/abstract}
+\پایان{چکیده}
+
+
+\setlength{\baselineskip}{0.9cm}
+\pagenumbering{tartibi}\tableofcontents\listoftables\listoffigures
+%list of abbreviations may be added here...
+
+
+\PrepareForMainContent
+\input{general/thesis_content}
+
+
+
+\PrepareForBibliography
+
+\setlatintextfont[Scale=1]{Times New Roman}
+\setlength{\baselineskip}{0.8cm}
+%\setromantextfont[Scale=1.2]{XB Niloofar}
+
+%\bibliographystyle{IEEEtran}
+%\bibliographystyle{is-unsrt}
+\bibliographystyle{ieeetr-fa}
+%\bibliographystyle{amsplain}
+
+\bibliography{resources/resources}
+%\printbibliography
+
+% glossaries
+{\cleardoublepage\setlength{\baselineskip}{1cm}\printpersianglossary\cleardoublepage\printenglishglossary}
+
+
+\PrepareForLatinPages
+\date{September 2013}
+\logo{\includegraphics[scale=.4]{logo-en}}
+\title{\sffamily\enTitle}
+\author{\sffamily\enAuthor}
+\university{\bf Sharif University of Technology\\Computer Engineering Department}
+\subject{Your Major in English Language}
+\supervisor{\sffamily Dr. <name of advisor prof.>}
+%If you don't have a consultant professor, comment following line
+\consult{\sffamily Dr. <name of consultant prof.>}
+\begin{abstract}{\enKeywords}
+\input{general/abstract-en}
+\end{abstract}
+\makethesistitle
+\پایان{نوشتار}

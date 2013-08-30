@@ -1,0 +1,64 @@
+\usepackage{amssymb}
+\usepackage{algorithmicx}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{comment}
+\usepackage{cite}
+\usepackage{fancybox}
+\usepackage{paralist}
+\usepackage{textcomp}
+\usepackage{rotating}
+
+\newcounter{tablerow}
+\renewcommand{\arraystretch}{1.5}
+\usepackage{cleveref}
+\newcommand{\crefrangeconjunction}{--}
+\crefformat{tablerow}{#2#1#3}
+\crefmultiformat{tablerow}{#2#1#3}%
+{ و~#2#1#3}%
+{, #2#1#3}%
+{ و~#2#1#3}
+\crefformat{section}{#2#1#3}
+\crefmultiformat{section}{#2#1#3}%
+{ و~#2#1#3}%
+{, #2#1#3}%
+{ و~#2#1#3}
+
+
+
+\input{general/translitaration}
+\input{general/glossaries}
+
+
+\newcommand{\myrotate}[3][]{\rotatebox{90}{\parbox[c][#1]{#2}{\centering\arraybackslash\rl{#3}}}}
+\newcommand{\multilinescell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\twolinescell}[3][c]{\multilinescell[#1]{#2\\#3}}
+\newcommand{\itemrl}[1][]{\item[\rl{#1}]}
+\eqcommand{چرخش}{myrotate}
+\eqcommand{سلولچندخطی}{multilinescell}
+\eqcommand{سلول‌دوخطی}{twolinescell}
+\eqcommand{فقره‌راست}{itemrl}
+
+
+
+\newcommand{\Eqn}[1]%
+{فرمول~(#1) }
+\newcommand{\Eqns}[1]%
+{فرمول‌های~(#1) }
+
+\eqcommand{فرمول}{Eqn}
+\eqcommand{فرمولهای}{Eqns}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+
+\graphicspath{{img/}}% tell tex engine address of folder containing your pictures
+
+
+\hypersetup{
+	pdftitle = {\enTitle},
+	pdfauthor = {\enAuthor},
+	pdfsubject = {\enSubject},
+	pdfkeywords = {\enKeywords}
+}
