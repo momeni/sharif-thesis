@@ -1,6 +1,6 @@
 #Sharif Thesis
 
-This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://sharif.edu/~library/Guide_Theses.pdf). All SUT's theses are supposed to be written in Persian. The [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package is employed for typesetting Persian text. And the scrbook is used as the base document class for the sharifthesis document class.
+This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://sharif.edu/~library/Guide_Theses.pdf). All SUT's theses are supposed to be written in Persian. The [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package is employed for typesetting Persian text. And scrbook is used as the base document class for the sharifthesis document class.
 
 ##Template Organization
 The template is organized as follows:
@@ -15,10 +15,10 @@ The template is organized as follows:
    * thesis_content.tex: This file must be updated to include all chapters,
  * img folder: Includes all images (it may have subfolders too),
  * resources: Includes resources.bib for citations. You may want to save PDF of used resources in that folder too,
- * one folder for each chapter of the thesis including a .tex file with same name. For example find the introduction and future_work folders.
+ * one folder for each chapter of the thesis including a .tex file with the same name. For example find the introduction and future_work folders.
 
 ##Compilation
-For compiling TeX files to PDF, issue **make** command. It compiles bibtex for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and *make* to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
+For compiling TeX files to PDF, issue **make** command. It compiles bibtex for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and **make** to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
 
 ##License
     Copyright © 2013 Behnam Momeni
@@ -37,5 +37,5 @@ For compiling TeX files to PDF, issue **make** command. It compiles bibtex for r
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
 ##Acknowledgments
-I want to acknowledge works of Mr. Sadegh Dorri for his code which was the first stone helping to built this template and his ideas and TeX codes continuing to improve this template. I also want to thank Mr. Vafa Khalighi for his great work with [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package. Most of TeX-based Persian documents owes to him :) At last, I should thank all helpful persons that I forgot to mention here (if you want to have your name listed here, drop an email).
+I want to acknowledge works of Mr. Sadegh Dorri for his code which was the corner stone helping to build this template and his ideas and TeX codes continuing to improve this template. I also want to thank Mr. Vafa Khalighi for his great work with [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package. Most of TeX-based Persian documents owe to him :) At last, I should thank all the helpful people that I forgot to mention here (if you want to have your name listed here, drop an email).
 
