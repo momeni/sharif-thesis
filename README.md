@@ -12,16 +12,16 @@ The template is organized as follows:
    * glossaries.tex: List of glossary words. For examples read the main.pdf file,
    * preamble.tex: Includes all related files. Probably you won't need to read it,
    * translitaration.tex: Translitarate English words to Persian alphabet and define English TeX commands for writing them faster,
-   * thesis_content.tex: This file must be updated to include all chapters,
+   * thesis\_content.tex: This file must be updated to include all chapters,
  * img folder: Includes all images (it may have subfolders too),
  * resources: Includes resources.bib for citations. You may want to save PDF of used resources in that folder too,
- * one folder for each chapter of the thesis including a .tex file with the same name. For example find the introduction and future_work folders.
+ * one folder for each chapter of the thesis including a .tex file with the same name. For example find the introduction and future\_work folders.
 
 ##Compilation
-For compiling TeX files to PDF, issue **make** command. It compiles bibtex for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and **make** to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
+For compiling TeX files to PDF, issue **make** command. It compiles biber (a biblatex engine) for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and **make** to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
 
 ##License
-    Copyright © 2013 Behnam Momeni
+    Copyright © 2013-2014 Behnam Momeni
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
