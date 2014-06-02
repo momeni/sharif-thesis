@@ -1,16 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sharifthesis}[2013/08/29 Sharif Thesis v1.0.0]
+\ProvidesClass{sharifthesis}[2014/05/30 Sharif Thesis v1.1.0]
 
 \LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc]{scrbook}
 
 \DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
 \DeclareOption{PhDThesis}{\def\@fordegree{\if@Latin Ph. D. Thesis\else پایان‌نامه‌ی دکتری\fi}}
+\DeclareOption{PhDProposal}{\def\@fordegree{\if@Latin Ph. D. Research Proposal\else پیشنهاد پژوهشی دکتری\fi}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 \ProcessOptions\relax
 
-\RequirePackage{amsmath,amsthm,fancyhdr,titlesec}
+\RequirePackage{amsmath,amsthm,fancyhdr,titlesec,rotating}
 
 \renewcommand\headfont{\small\itshape}
 \renewcommand*\sectfont{\normalcolor\bfseries}

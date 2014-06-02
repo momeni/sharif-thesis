@@ -2,9 +2,12 @@
 %\documentclass[MScThesis,oneside]{sharifthesis}
 \documentclass[PhDThesis,twoside]{sharifthesis}
 %\documentclass[PhDThesis,oneside]{sharifthesis}
+%\documentclass[PhDProposal,twoside]{sharifthesis}
+%\documentclass[PhDProposal,oneside]{sharifthesis}
 
 %\def\enSubject{Master of Science Thesis (Information Technology Major), Computer Engineering Department, Sharif University of Technology, Tehran, I. R. Iran}
 \def\enSubject{Doctor of Philosophy Thesis (Information Technology Major), Computer Engineering Department, Sharif University of Technology, Tehran, I. R. Iran}
+%\def\enSubject{Doctor of Philosophy Research Proposal (Information Technology Major), Computer Engineering Department, Sharif University of Technology, Tehran, I. R. Iran}
 
 \def\enTitle{Title of thesis (prefer one-line titles)}
 \def\enAuthor{‌Behnam Momeni}
@@ -20,7 +23,7 @@
 واژه‌ی کلیدی پایانی}
 \eqcommand{واژه‌های‌کلیدی}{faKeywords}
 \آرم{\درج‌تصویر[scale=.7]{logo}}
-\تاریخ{شهریور ۱۳۹۲}
+\تاریخ{اردیبهشت ۱۳۹۳}
 \عنوان{عنوان پایان‌نامه (ترجیح بر تک‌خط بودن)}
 \نویسنده{بهنام مومنی}
 \دانشگاه{{\نستعلیق\درشت‌تر دانشگاه صنعتی شریف %
@@ -68,12 +71,16 @@
 \پایان{وسط‌چین}
 \vfill}
 
+%the initial title is supposed to be printed on the cover.
+%for non final version, you can leave following commands as is to create only one title page (printed on paper)
+%for final version you need to swap folowing commented/uncommented makethesistitle commands to achieve this order: title on the cover THEN in the name of god page THEN another title page but this time printed on paper
 \makethesistitle
 \StartDocument
-\makethesistitle
+%\makethesistitle
 
 \pagestyle{pagenumberonlyPagestyle}
-
+% following parts are not required in PhD proposal and should be removed. BEGIN OF COMMENT FOR PhD Proposal........
+%صفحه‌ی تصویب در پیشنهاد پژوهشی وجود ندارد.
 \شروع{تصویب}
 %خط‌های زیر در صورت نبود استاد مدعو comment شوند
 \داور{استاد مدعو}{دکتر <نام استاد مدعو ۱>}
@@ -93,6 +100,7 @@
 \شروع{قدردانی}
 صفحه‌ی قدردانی. این صفحه اختیاری بوده و می‌توانید آن را حذف کنید. برای این کار کافی است محیط قدردانی در پرونده‌ی تِک را حذف کنید. متداول است که در این صفحه از خانواده، استادها و همکارهای خود قدردانی نمایید.
 \پایان{قدردانی}
+% END OF COMMENT FOR PhD Proposal.
 
 \شروع{چکیده}{\واژه‌های‌کلیدی}
 \input{general/abstract}
@@ -130,7 +138,7 @@
 
 
 \PrepareForLatinPages
-\date{September 2013}
+\date{April 2014}
 \logo{\includegraphics[scale=.4]{logo-en}}
 \title{\sffamily\enTitle}
 \author{\sffamily\enAuthor}
