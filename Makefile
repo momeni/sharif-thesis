@@ -63,6 +63,9 @@ once: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
 view: $(SRC).pdf
 	evince $< &
 
+markdown: TODO.markdown
+	markdown $< > TODO.html
+
 cleanall: clean cleansvg cleanfig
 
 clean:

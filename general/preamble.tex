@@ -50,8 +50,21 @@
 \eqcommand{فرمول}{Eqn}
 \eqcommand{فرمولهای}{Eqns}
 
+\فرمان‌نو{\نگا}{ن.بـ.}
+\فرمان‌نو{\نگاص}[1]{\نگا{} صفحه‌ی~\رجوع‌صفحه{#1}}
+\فرمان‌نو{\آیم}[1][$i$]%
+{#1اُم}
+
 \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 
+\فرمان‌نو{\نامک}[1]{%
+\fcolorbox{red}{yellow}{\begin{minipage}{\textwidth}#1\end{minipage}}}
+
+\newcommand{\tobewritten}[1]{\نامک{%
+این جعبه، باید با متن متناظر با \چر{#1} جای‌گزین گردد.
+
+برای دریافتن معنی \چر{#1} به پرونده‌ی \چر{TODO} نگاه کنید.
+}}
 
 \graphicspath{{img/}}% tell tex engine address of folder containing your pictures
 

@@ -11,7 +11,7 @@
 
 \ProcessOptions\relax
 
-\RequirePackage{amsmath,amsthm,fancyhdr,titlesec,rotating}
+\RequirePackage{amsmath,amsthm,fancyhdr,titlesec,rotating,scrhack}
 
 \renewcommand\headfont{\small\itshape}
 \renewcommand*\sectfont{\normalcolor\bfseries}
@@ -37,7 +37,7 @@
 
 \newenvironment{abstract}[1]
 {\def\@pkeywords{#1}\cleardoubleemptypage\begin{center}\Large\bfseries\st@title\end{center}\subsection*{\if@Latin Abstract\else چکیده\fi}\begin{quote}\setlength{\baselineskip}{0.8cm}}
-{\end{quote}\paragraph*{\if@Latin Keywords\else واژه‌های کلیدی\fi:}{\@pkeywords.}\cleardoubleemptypage}
+{\end{quote}\paragraph*{\if@Latin Keywords\else کلیدواژه‌ها\fi:}{\@pkeywords.}\cleardoubleemptypage}
 
 \newenvironment{قدردانی}
 {\cleardoubleemptypage\centerline{\Large\bfseries قدردانی}\begin{quote}}
@@ -46,21 +46,21 @@
 \newenvironment{تصویب}
 {\def\BigSkip{\par\vskip6\bigskipamount}\def\SmallSkip{\par\vskip2\bigskipamount}
 \def\dashes{\tiny\normalcolor.. ... .. ... .. ... ... .. ... .. ... .. ... ...}
-\def\signat{\bf امضاء\dashes\\[1cm]}
+\def\signat{\normalfont\bfseries امضاء\dashes\\[1cm]}
 \def\داور%
-##1##2{{\bf ##1:} & {\large##2} & \signat}
+##1##2{{\normalfont\bfseries ##1:} & {\large##2} & \signat}
 \cleardoubleemptypage\begin{center}
-\bf به نام خدا\SmallSkip\st@normaluniversity\BigSkip{\large\@fordegree}
+\normalfont\bfseries به نام خدا\SmallSkip\st@normaluniversity\BigSkip{\large\@fordegree}
 \end{center}\SmallSkip\begin{tabular}{rr}
-{\bf عنوان:} & {\large\st@title} \\[\medskipamount]
-{\bf \@by:} & {\large\st@author}
+{\normalfont\bfseries عنوان:} & {\large\st@title} \\[\medskipamount]
+{\normalfont\bfseries \@by:} & {\large\st@author}
 \end{tabular}\BigSkip
-{\bf\large کمیته‌ی ممتحنین:}\SmallSkip\begin{center}
+{\normalfont\bfseries\large کمیته‌ی ممتحنین:}\SmallSkip\begin{center}
 \begin{tabular*}{.9\textwidth}{r r @{\extracolsep{\fill}} l}
-{\bf\@undersup:} & {\large\st@supervisor} & \signat
-\ifdefined\st@consult {\bf\@undercons:} & {\large\st@consult} & \signat\fi
+{\normalfont\bfseries\@undersup:} & {\large\st@supervisor} & \signat
+\ifdefined\st@consult {\normalfont\bfseries\@undercons:} & {\large\st@consult} & \signat\fi
 }%above declares the beginning of تصویب environment.
-{&& {\bf تاریخ:} {\normalsize\bf \dashes}
+{&& {\normalfont\bfseries تاریخ:} {\normalsize\normalfont\bfseries \dashes}
 \end{tabular*}\end{center}}
 
 \let\origin@lmaketitle\maketitle
