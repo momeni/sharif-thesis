@@ -12,6 +12,7 @@
 
 
 \input{general/preamble}
+\addbibresource{resources/resources.bib}
 
 
 \newcommand{\faKeywords}{واژه‌ی کلیدی نخست،
@@ -110,17 +111,19 @@
 
 \PrepareForBibliography
 
-\setlatintextfont[Scale=1]{Times New Roman}
+\setlatintextfont[Scale=1]{Linux Libertine}
 \setlength{\baselineskip}{0.8cm}
 %\setromantextfont[Scale=1.2]{XB Niloofar}
 
 %\bibliographystyle{IEEEtran}
 %\bibliographystyle{is-unsrt}
-\bibliographystyle{ieeetr-fa}
+%\bibliographystyle{ieeetr-fa}
 %\bibliographystyle{amsplain}
 
-\bibliography{resources/resources}
-%\printbibliography
+%\bibliography{resources/resources}
+\latin
+\printbibliography[title=\bibliographytitle,heading=bibintoc]
+\persian
 
 % glossaries
 {\cleardoublepage\setlength{\baselineskip}{1cm}\printpersianglossary\cleardoublepage\printenglishglossary}

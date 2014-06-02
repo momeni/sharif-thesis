@@ -3,7 +3,7 @@ SRC=main
 
 # Commands and options
 TEX=xelatex
-BIB=bibtex
+BIB=biber
 XINDY=xindy
 
 # Output PDF minor version
@@ -48,7 +48,8 @@ $(SRC).pdf: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
 	$(TEX) $(TEXOPTIONS) $<
 	$(BIB) $(SRC)
 	#$(XINDY) -L persian -C utf8 -I xindy -M $(SRC) -t $(SRC).glg -o $(SRC).gls $(SRC).glo
-	$(XINDY) --language persian --codepage utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).fa.glg --out-file $(SRC).fa.gls $(SRC).fa.glo
+	# variant1: Sorts آ and ا together, variant2: Separates them.
+	$(XINDY) --language persian --codepage variant1-utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).fa.glg --out-file $(SRC).fa.gls $(SRC).fa.glo
 	$(XINDY) --language english --codepage utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).en.glg --out-file $(SRC).en.gls $(SRC).en.glo
 	#makeglossaries $(SRC)
 	$(TEX) $(TEXOPTIONS) $<

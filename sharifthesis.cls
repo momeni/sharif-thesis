@@ -201,7 +201,7 @@
 \def\footnoteautorefname{پاورقی}
 
 \settextfont[Scale=1]{XBZar}
-\setlatintextfont[Scale=1]{Times New Roman}
+\setlatintextfont[Scale=1]{Linux Libertine}
 \setdigitfont{XBYas}
 
 \interfootnotelinepenalty=10000 % prevent LaTeX from splitting footnotes across pages
