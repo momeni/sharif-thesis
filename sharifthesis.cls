@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2014/05/30 Sharif Thesis v1.1.0]
 
-\LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc]{scrbook}
+\LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc,chapterprefix=true]{scrbook}
 
 \DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
 \DeclareOption{PhDThesis}{\def\@fordegree{\if@Latin Ph. D. Thesis\else پایان‌نامه‌ی دکتری\fi}}
@@ -11,17 +11,17 @@
 
 \ProcessOptions\relax
 
-\RequirePackage{amsmath,amsthm,fancyhdr,titlesec,rotating,scrhack}
+\RequirePackage{amsmath,amsthm,scrpage2,rotating,scrhack}
 
 \renewcommand\headfont{\small\itshape}
 \renewcommand*\sectfont{\normalcolor\bfseries}
 
 \setcounter{secnumdepth}{3}
 
-\titleformat{\chapter}[display]
-	{\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{50pt}{40pt}
-
+\setkomafont{chapter}{\normalfont\huge\bfseries\centering}
+\renewcommand*{\chapterheadstartvskip}{\vskip51pt}
+\renewcommand*{\chapterformat}{\Huge\chapapp\ \thechapter\\[5pt]}
+\renewcommand*{\chapterheadendvskip}{\vskip40pt}
 
 \RequirePackage[left=2.5cm,bottom=2.5cm,right=3cm,top=3cm,footskip=1cm]{geometry}
 \sloppy\parindent1.5em
@@ -127,33 +127,43 @@
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 
-\fancypagestyle{pagenumberonlyPagestyle}{
-	\fancyhf{}
-	\renewcommand{\headrulewidth}{0pt} % remove line
-	\fancyfoot[C]{\thepage}
+\newpagestyle{pagenumberonlyPagestyle}
+{% header definition
+	(0pt,0pt)
+	{}{}{}
+	(0pt,0pt)
+}{% footer definition
+	(0pt,0pt)
+	{\hfill\pagemark\hfill}% even pages
+	{\hfill\pagemark\hfill}% odd pages
+	{\hfill\pagemark\hfill}% one-sided layout pages
+	(0pt,0pt)
 }
-\fancypagestyle{plain}{
-	\fancyhf{}
-	\renewcommand{\headrulewidth}{0pt}
-	\fancyfoot[C]{\thepage}
+\renewpagestyle{plain}
+{% header definition
+	(0pt,0pt)
+	{}{}{}
+	(0pt,0pt)
+}{% footer definition
+	(0pt,0pt)
+	{\hfill\pagemark\hfill}% even pages
+	{\hfill\pagemark\hfill}% odd pages
+	{\hfill\pagemark\hfill}% one-sided layout pages
+	(0pt,0pt)
 }
-\if@twoside
-	\fancypagestyle{ThesisPagestyle}{
-		\fancyhf{}
-		\renewcommand{\headrulewidth}{0.45pt}
-		\fancyhead[LO]{\rightmark}
-		\fancyhead[RE]{\leftmark}
-		\fancyfoot[C]{\thepage}
-	}
-\else
-	\fancypagestyle{ThesisPagestyle}{
-		\fancyhf{}
-		\renewcommand{\headrulewidth}{0.45pt}
-		\fancyhead[L]{\rightmark}
-		\fancyhead[R]{\leftmark}
-		\fancyfoot[C]{\thepage}
-	}
-\fi
+\newpagestyle{ThesisPagestyle}
+{% header definition
+	(0pt,0pt)
+	{\leftmark\hfill}% even pages
+	{\hfill\rightmark}% odd pages
+	{\leftmark\hfill\rightmark}% one-sided layout pages
+	(\textwidth,0.45pt)
+}{% footer definition
+	{\hfill\pagemark\hfill}% even pages
+	{\hfill\pagemark\hfill}% odd pages
+	{\hfill\pagemark\hfill}% one-sided layout pages
+	(0pt,0pt)
+}
 
 \RequirePackage[table]{xcolor}
 % Colors for hyperref
