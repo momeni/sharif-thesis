@@ -283,22 +283,53 @@
 \newglossaryentry{fa:\key}{type={p2e-terms}, name={#2}, description={#3}}% persian glossary
 }
 
-%\showTransFirst{نمونه}{Example}{شکل جمع که نادیده گرفته می‌شود}{Actual Form: نمونه‌های}
-\newcommand{\showTransFirst}[4]{% translation for the first time
-\ifthenelse{\isempty{#4}}%
-{\textit{#1}\LTRfootnote{#2}}% if #4 is empty
-{\textit{#4}\LTRfootnote{#2}}% if #4 is NOT empty
+\defglsentryfmt[p2e-terms]{%
+  \ifdefempty\glsinsert
+  {% use word itself
+    \ifglsused\glslabel
+    {% subsequent usages
+        \glsifplural
+        {%
+          \glscapscase
+          {\glsentryplural{\glslabel}}%
+          {\Glsentryplural{\glslabel}}%
+          {\mfirstucMakeUppercase{\glsentryplural{\glslabel}}}%
+        }%
+        {%
+          \glscapscase
+          {\glsentrytext{\glslabel}}%
+          {\Glsentrytext{\glslabel}}%
+          {\mfirstucMakeUppercase{\glsentrytext{\glslabel}}}%
+        }%
+    }%
+    {% first usage
+      \emph{%
+        \glsifplural
+        {%
+          \glscapscase
+          {\glsentryfirstplural{\glslabel}}%
+          {\Glsentryfirstplural{\glslabel}}%
+          {\mfirstucMakeUppercase{\glsentryfirstplural{\glslabel}}}%
+        }%
+        {%
+          \glscapscase
+          {\glsentryfirst{\glslabel}}%
+          {\Glsentryfirst{\glslabel}}%
+          {\mfirstucMakeUppercase{\glsentryfirst{\glslabel}}}%
+        }%
+      }\LTRfootnote{\glsentrydesc{\glslabel}}
+    }%
+  }%
+  {% override word with glsinsert
+    \ifglsused\glslabel
+    {% subsequent usages
+      \glsinsert
+    }%
+    {% first usage
+      \emph{\glsinsert}\LTRfootnote{\glsentrydesc{\glslabel}}
+    }%
+  }
 }
-
-%\showTrans{نمونه}{Example}{شکل جمع که نادیده گرفته می‌شود}{Actual Form: نمونه‌های}
-\newcommand{\showTrans}[4]{% translation for next times
-\ifthenelse{\isempty{#4}}%
-{{#1}}% if #4 is empty
-{{#4}}% if #4 is NOT empty
-}
-
-\defglsdisplayfirst[p2e-terms]{\showTransFirst{#1}{#2}{#3}{#4}}
-\defglsdisplay[p2e-terms]{\showTrans{#1}{#2}{#3}{#4}}
 
 %\term[نمونه‌های]{key}
 \newcommand{\term}[2][]{%
