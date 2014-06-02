@@ -68,7 +68,11 @@
   \def\@titlepagesize{\Large\normalfont}
   \def\@titlehead{\centering\st@logo\\\smallskip\large\st@university}
   \def\@subject{\vskip0.1cm\@fordegree\\\st@subject}
-  \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@title}}
+  \ifx\st@titlelineone\undefined
+    \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@title}}
+  \else
+    \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@titlelineone\\}{\st@titlelinetwo}}
+  \fi
   \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[3\bigskipamount]%
     {\@titlepagesize\@undersup}\\{\st@supervisor}%
     \ifdefined\st@consult\\[3\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@Latin\\[4\bigskipamount]\else\\[3\bigskipamount]\fi\else\if@Latin\\[7\bigskipamount]\else\\[6\bigskipamount]\fi\fi}
@@ -80,6 +84,8 @@
   \newcommand\subject[1]{\def\st@subject{##1}}}
 \renewcommand\date[1]{\def\st@date{#1}}
 \renewcommand\title[1]{\def\st@title{#1}}
+\newcommand\titlelineone[1]{\def\st@titlelineone{#1}}
+\newcommand\titlelinetwo[1]{\def\st@titlelinetwo{#1}}
 \renewcommand\author[1]{\def\st@author{#1}}
 \renewcommand\subject[1]{\def\st@subject{#1}}
 \newcommand\logo[1]{\def\st@logo{#1}}
@@ -177,6 +183,8 @@
 \eqcommand{دانشگاه}{university}
 \eqcommand{دانشگاه‌عادی}{normaluniversity}
 \eqcommand{موضوع}{subject}
+\eqcommand{عنوانخطیک}{titlelineone}
+\eqcommand{عنوانخطدو}{titlelinetwo}
 \eqcommand{استادراهنما}{supervisor}
 \eqcommand{استادمشاور}{consult}
 \eqcommand{آرم}{logo}
