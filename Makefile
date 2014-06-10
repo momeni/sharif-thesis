@@ -54,7 +54,7 @@ $(SRC).pdf: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
 	#makeglossaries $(SRC)
 	$(TEX) $(TEXOPTIONS) $<
 	while grep --fixed-strings "Rerun to" $(SRC).log ; do $(TEX) $(TEXOPTIONS) $< ; done
-	@echo "===========================\nWarnings:\n"
+	@echo -e "===========================\nWarnings:\n"
 	@grep 'Warning\|Error\|Underful\|Overful' $(SRC).log | sort
 
 once: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
@@ -69,7 +69,7 @@ markdown: TODO.markdown
 cleanall: clean cleansvg cleanfig
 
 clean:
-	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy introduction/*.aux future_works/*.aux
+	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
 
 cleansvg:
 	rm -fv $(SVGOUT)
