@@ -284,51 +284,42 @@
 }
 
 \defglsentryfmt[p2e-terms]{%
-  \ifdefempty\glsinsert
-  {% use word itself
-    \ifglsused\glslabel
-    {% subsequent usages
-        \glsifplural
-        {%
-          \glscapscase
-          {\glsentryplural{\glslabel}}%
-          {\Glsentryplural{\glslabel}}%
-          {\mfirstucMakeUppercase{\glsentryplural{\glslabel}}}%
+  \ifdefempty\glsinsert{% use word itself
+    \ifglsused\glslabel{% subsequent usages
+        \glsifplural{%
+          \glscapscase{\glsentryplural{\glslabel}}%
+            {\Glsentryplural{\glslabel}}%
+            {\mfirstucMakeUppercase{\glsentryplural{\glslabel}}}%
         }%
         {%
-          \glscapscase
-          {\glsentrytext{\glslabel}}%
-          {\Glsentrytext{\glslabel}}%
-          {\mfirstucMakeUppercase{\glsentrytext{\glslabel}}}%
+          \glscapscase{\glsentrytext{\glslabel}}%
+            {\Glsentrytext{\glslabel}}%
+            {\mfirstucMakeUppercase{\glsentrytext{\glslabel}}}%
         }%
     }%
     {% first usage
       \emph{%
-        \glsifplural
-        {%
-          \glscapscase
-          {\glsentryfirstplural{\glslabel}}%
-          {\Glsentryfirstplural{\glslabel}}%
-          {\mfirstucMakeUppercase{\glsentryfirstplural{\glslabel}}}%
+        \glsifplural{%
+          \glscapscase{\glsentryfirstplural{\glslabel}}%
+            {\Glsentryfirstplural{\glslabel}}%
+            {\mfirstucMakeUppercase{\glsentryfirstplural{\glslabel}}}%
         }%
         {%
-          \glscapscase
-          {\glsentryfirst{\glslabel}}%
-          {\Glsentryfirst{\glslabel}}%
-          {\mfirstucMakeUppercase{\glsentryfirst{\glslabel}}}%
+          \glscapscase{\glsentryfirst{\glslabel}}%
+            {\Glsentryfirst{\glslabel}}%
+            {\mfirstucMakeUppercase{\glsentryfirst{\glslabel}}}%
         }%
-      }\LTRfootnote{\glsentrydesc{\glslabel}}
+      }\LTRfootnote{\glsentrydesc{\glslabel}}%
     }%
   }%
   {% override word with glsinsert
-    \ifglsused\glslabel
-    {% subsequent usages
-      \glsinsert
+    \ifglsused\glslabel{% subsequent usages
+      \glsinsert%
     }%
     {% first usage
-      \emph{\glsinsert}\LTRfootnote{\glsentrydesc{\glslabel}}
+      \emph{\glsinsert}\LTRfootnote{\glsentrydesc{\glslabel}}%
     }%
-  }
+  }%
 }
 
 %\term[نمونه‌های]{key}
