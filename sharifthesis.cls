@@ -221,7 +221,7 @@
 
 \settextfont[Scale=1]{XBZar}
 \setlatintextfont[Scale=1]{Linux Libertine}
-\setdigitfont{XBYas}
+\setdigitfont{Yas}
 
 \interfootnotelinepenalty=10000 % prevent LaTeX from splitting footnotes across pages
 
