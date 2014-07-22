@@ -172,11 +172,13 @@
     \definecolor{darkblue}{rgb}{0,0,0.5}    % Web color: Navy
 % end of colors
 
-\RequirePackage[xetex,colorlinks,bookmarksnumbered,linkcolor=darkblue, citecolor=darkred, urlcolor=darkgreen]{hyperref}
-\RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref.
+\RequirePackage[xetex,colorlinks,bookmarksnumbered,linkcolor=darkblue,citecolor=darkred,urlcolor=darkgreen]{hyperref}
+\RequirePackage{subcaption}
+\RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
+
 \RequirePackage[xindy,sanitize={name=true,description=false,symbol=true}]{glossaries} % must be after hyperref for links.
 
-\RequirePackage{multicol,float,subfig}
+\RequirePackage{multicol,float}
 % The order of package inclusions is important
 \RequirePackage{xepersian}
 
