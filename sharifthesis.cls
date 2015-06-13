@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sharifthesis}[2014/05/30 Sharif Thesis v1.1.0]
+\ProvidesClass{sharifthesis}[2015/06/13 Sharif Thesis v1.2.0]
 
 \LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc,chapterprefix=true]{scrbook}
 
@@ -178,9 +178,9 @@
 
 \RequirePackage[xindy,sanitize={name=true,description=false,symbol=true}]{glossaries} % must be after hyperref for links.
 
-\RequirePackage{multicol,float}
+\RequirePackage{multicol,float,array}
 % The order of package inclusions is important
-\RequirePackage{xepersian}
+\RequirePackage[localise]{xepersian}
 
 \RequirePackage{url}
 %% Define a new 'leo' style for the package that will use a smaller font.
