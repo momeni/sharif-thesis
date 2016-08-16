@@ -180,7 +180,7 @@
 
 \RequirePackage{multicol,float,array}
 % The order of package inclusions is important
-\RequirePackage[localise]{xepersian}
+\RequirePackage[localise,extrafootnotefeatures]{xepersian}
 
 \RequirePackage{url}
 %% Define a new 'leo' style for the package that will use a smaller font.
