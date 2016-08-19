@@ -5,7 +5,8 @@
 	paper=A4,pagesize,
 	headsepline,
 	bibliography=totoc,
-	chapterprefix=true]
+	chapterprefix=true,
+	toc=flat]
 	{scrbook}
 
 \DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
@@ -23,6 +24,7 @@
 
 \setcounter{secnumdepth}{3}
 
+\addtokomafont{chapterentry}{\hspace{-1.5cm}}
 \setkomafont{chapter}{\normalfont\huge\bfseries\centering}
 \renewcommand*{\chapterheadstartvskip}{\vskip51pt}
 \renewcommand*{\chapterformat}{\Huge\chapapp\ \thechapter\\[5pt]}
