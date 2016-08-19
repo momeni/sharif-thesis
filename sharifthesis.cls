@@ -181,7 +181,7 @@
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
-\RequirePackage[xindy,sanitize={name=true,description=false,symbol=true}]{glossaries} % must be after hyperref for links.
+\RequirePackage[xindy]{glossaries} % must be after hyperref for links.
 
 \RequirePackage{multicol,float,array}
 % The order of package inclusions is important
