@@ -1,7 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2015/06/13 Sharif Thesis v1.2.0]
 
-\LoadClass[12pt,a4paper,BCOR=.7cm,headsepline,bibliography=totoc,chapterprefix=true]{scrbook}
+\LoadClass[fontsize=12pt,
+	paper=A4,pagesize,
+	headsepline,
+	bibliography=totoc,
+	chapterprefix=true]
+	{scrbook}
 
 \DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
 \DeclareOption{PhDThesis}{\def\@fordegree{\if@Latin Ph. D. Thesis\else پایان‌نامه‌ی دکتری\fi}}
