@@ -25,7 +25,8 @@
 \setcounter{secnumdepth}{3}
 
 \addtokomafont{chapterentry}{\hspace{-1.5cm}}
-\setkomafont{chapter}{\normalfont\huge\bfseries\centering}
+
+\renewcommand*{\raggedchapter}{\centering}
 \renewcommand*{\chapterheadstartvskip}{\vskip51pt}
 \renewcommand*{\chapterformat}{\Huge\chapapp\ \thechapter\\[5pt]}
 \renewcommand*{\chapterheadendvskip}{\vskip40pt}
