@@ -53,7 +53,7 @@ $(SRC).pdf: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
 	$(XINDY) --language english --codepage utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).en.glg --out-file $(SRC).en.gls $(SRC).en.glo
 	#makeglossaries $(SRC)
 	$(TEX) $(TEXOPTIONS) $<
-	while grep --fixed-strings "Rerun to" $(SRC).log ; do $(TEX) $(TEXOPTIONS) $< ; done
+	while grep --fixed-strings "Rerun to" $(SRC).log || grep --fixed-strings "Please rerun LaTeX" $(SRC).log ; do $(TEX) $(TEXOPTIONS) $< ; done
 	@echo -e "===========================\nWarnings:\n"
 	@grep 'Warning\|Error\|Underful\|Overful' $(SRC).log | sort
 
