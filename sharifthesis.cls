@@ -9,9 +9,10 @@
 	toc=flat]
 	{scrbook}
 
-\DeclareOption{MScThesis}{\def\@fordegree{\if@Latin M. Sc. Thesis\else پایان‌نامه‌ی کارشناسی ارشد\fi}}
-\DeclareOption{PhDThesis}{\def\@fordegree{\if@Latin Ph. D. Thesis\else پایان‌نامه‌ی دکتری\fi}}
-\DeclareOption{PhDProposal}{\def\@fordegree{\if@Latin Ph. D. Research Proposal\else پیشنهاد پژوهشی دکتری\fi}}
+
+\DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M. Sc. Thesis\fi}}
+\DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه‌ی دکتری\else Ph. D. Thesis\fi}}
+\DeclareOption{PhDProposal}{\def\@fordegree{\if@nonlatin پیشنهاد پژوهشی دکتری\else Ph. D. Research Proposal\fi}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
@@ -44,8 +45,8 @@
 \newcommand{\PrepareForLatinPages}{\cleardoubleemptypage\pagestyle{empty}\latin}
 
 \newenvironment{abstract}[1]
-{\def\@pkeywords{#1}\cleardoubleemptypage\begin{center}\Large\bfseries\st@title\end{center}\subsection*{\if@Latin Abstract\else چکیده\fi}\begin{quote}\setlength{\baselineskip}{0.8cm}}
-{\end{quote}\paragraph*{\if@Latin Keywords\else کلیدواژه‌ها\fi:}{\@pkeywords.}\cleardoubleemptypage}
+{\def\@pkeywords{#1}\cleardoubleemptypage\begin{center}\Large\bfseries\st@title\end{center}\subsection*{\if@nonlatin چکیده\else Abstract\fi}\begin{quote}\setlength{\baselineskip}{0.8cm}}
+{\end{quote}\paragraph*{\if@nonlatin کلیدواژه‌ها\else Keywords\fi:}{\@pkeywords.}\cleardoubleemptypage}
 
 \newenvironment{قدردانی}
 {\cleardoubleemptypage\centerline{\Large\bfseries قدردانی}\begin{quote}}
@@ -83,8 +84,8 @@
   \fi
   \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[3\bigskipamount]%
     {\@titlepagesize\@undersup}\\{\st@supervisor}%
-    \ifdefined\st@consult\\[3\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@Latin\\[4\bigskipamount]\else\\[3\bigskipamount]\fi\else\if@Latin\\[7\bigskipamount]\else\\[6\bigskipamount]\fi\fi}
-  \def\@date{\ifdefined\st@date\st@date\else\if@Latin\latintoday\else\today\fi\fi\vspace{-100pt}}
+    \ifdefined\st@consult\\[3\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@nonlatin\\[3\bigskipamount]\else\\[4\bigskipamount]\fi\else\if@nonlatin\\[6\bigskipamount]\else\\[7\bigskipamount]\fi\fi}
+  \def\@date{\ifdefined\st@date\st@date\else\if@nonlatin\today\else\latintoday\fi\fi\vspace{-100pt}}
   \origin@lmaketitle
   \newcommand\date[1]{\def\st@date{##1}}
   \newcommand\title[1]{\def\st@title{##1}}
@@ -101,10 +102,10 @@
 \newcommand\normaluniversity[1]{\def\st@normaluniversity{#1}}
 \newcommand\supervisor[1]{\def\st@supervisor{#1}}
 \newcommand\consult[1]{\def\st@consult{#1}}
-\def\@thetitle{\if@Latin \hspace*{\fill}\else عنوان\fi}
-\def\@undersup{\if@Latin Supervisor:\else استاد راهنما\fi}
-\def\@undercons{\if@Latin Under consult of:\else استاد مشاور\fi}
-\def\@by{\if@Latin By:\else نگارش\fi}
+\def\@thetitle{\if@nonlatin عنوان\else\hspace*{\fill}\fi}
+\def\@undersup{\if@nonlatin استاد راهنما\else Supervisor:\fi}
+\def\@undercons{\if@nonlatin استاد مشاور\else Under consult of:\fi}
+\def\@by{\if@nonlatin نگارش\else By:\fi}
 \newtheorem{theorem}{قضیه}[chapter]
 \renewcommand\thetheorem{\thechapter\@SepMark\arabic{theorem}}
 \newtheorem{definition}[theorem]{تعریف}
