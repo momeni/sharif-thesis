@@ -6,7 +6,7 @@
 	headsepline,
 	bibliography=totoc,
 	chapterprefix=true,
-	toc=flat]
+	toc=indented]
 	{scrbook}
 
 
@@ -24,8 +24,6 @@
 \renewcommand*\sectfont{\normalcolor\bfseries}
 
 \setcounter{secnumdepth}{3}
-
-\addtokomafont{chapterentry}{\hspace{-1.5cm}}
 
 \renewcommand*{\raggedchapter}{\centering}
 \renewcommand*{\chapterheadstartvskip}{\vskip51pt}
