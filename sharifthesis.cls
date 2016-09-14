@@ -188,10 +188,11 @@
 \RequirePackage[xindy]{glossaries} % must be after hyperref for links.
 
 \RequirePackage{multicol,float,array}
-% The order of package inclusions is important
-\RequirePackage[localise,extrafootnotefeatures]{xepersian}
-
 \RequirePackage{url}
+% The order of package inclusions is important
+\RequirePackage[localise]{xepersian}
+
+
 %% Define a new 'leo' style for the package that will use a smaller font.
 \def\url@leostyle{%
   \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
