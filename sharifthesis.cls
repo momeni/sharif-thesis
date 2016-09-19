@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sharifthesis}[2015/06/13 Sharif Thesis v1.2.0]
+\ProvidesClass{sharifthesis}[2016/09/19 Sharif Thesis v1.3.0]
 
 \LoadClass[fontsize=12pt,
 	paper=A4,pagesize,
