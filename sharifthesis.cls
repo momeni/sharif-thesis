@@ -59,7 +59,7 @@
 \def\داور%
 ##1##2{{\normalfont\bfseries ##1:} & {\large##2} & \signat}
 \cleardoubleemptypage\begin{center}
-\normalfont\bfseries به نام خدا\SmallSkip\st@normaluniversity\BigSkip{\large\@fordegree}
+\normalfont\bfseries تصویب‌نامه\SmallSkip به نام خدا\\\st@normaluniversity\BigSkip{\large\@shortfordegree}
 \end{center}\SmallSkip\begin{tabular}{rr}
 {\normalfont\bfseries عنوان:} & {\large\st@title} \\[\medskipamount]
 {\normalfont\bfseries \@by:} & {\large\st@author}
