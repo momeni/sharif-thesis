@@ -10,9 +10,11 @@
 	{scrbook}
 
 
-\DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M. Sc. Thesis\fi}}
-\DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه‌ی دکتری\else Ph. D. Thesis\fi}}
-\DeclareOption{PhDProposal}{\def\@fordegree{\if@nonlatin پیشنهاد پژوهشی دکتری\else Ph. D. Research Proposal\fi}}
+\DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
+\def\@shortfordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M.Sc. Thesis\fi}}
+\DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin رساله به عنوان تحقق بخشی از شرایط دریافت درجه‌ی دکتری\else A dissertation submitted in partial fulfillment of the requirements for the Ph.D degree\fi}%
+\def\@shortfordegree{\if@nonlatin رساله‌ی دکتری\else Ph.D. Dissertation\fi}}
+\DeclareOption{PhDProposal}{\def\@fordegree{\if@nonlatin پیشنهاد پژوهشی دکتری\else Ph.D. Research Proposal\fi}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
@@ -74,13 +76,13 @@
 \def\makethesistitle{
   \def\@titlepagesize{\Large\normalfont}
   \def\@titlehead{\centering\st@logo\\\smallskip\large\st@university}
-  \def\@subject{\vskip0.1cm\@fordegree\\\st@subject}
+  \def\@subject{\vskip0.1cm\if@nonlatin\mbox{\@fordegree}\else\@fordegree\fi\\\if@nonlatin گرایش \fi\st@subject}
   \ifx\st@titlelineone\undefined
     \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@title}}
   \else
     \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@titlelineone\\}{\st@titlelinetwo}}
   \fi
-  \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[3\bigskipamount]%
+  \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[2\bigskipamount]%
     {\@titlepagesize\@undersup}\\{\st@supervisor}%
     \ifdefined\st@consult\\[3\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@nonlatin\\[3\bigskipamount]\else\\[4\bigskipamount]\fi\else\if@nonlatin\\[6\bigskipamount]\else\\[7\bigskipamount]\fi\fi}
   \def\@date{\ifdefined\st@date\st@date\else\if@nonlatin\today\else\latintoday\fi\fi\vspace{-100pt}}
@@ -100,9 +102,9 @@
 \newcommand\normaluniversity[1]{\def\st@normaluniversity{#1}}
 \newcommand\supervisor[1]{\def\st@supervisor{#1}}
 \newcommand\consult[1]{\def\st@consult{#1}}
-\def\@thetitle{\if@nonlatin عنوان\else\hspace*{\fill}\fi}
+\def\@thetitle{\hspace*{\fill}}
 \def\@undersup{\if@nonlatin استاد راهنما\else Supervisor:\fi}
-\def\@undercons{\if@nonlatin استاد مشاور\else Under consult of:\fi}
+\def\@undercons{\if@nonlatin استاد مشاور\else Advisor:\fi}
 \def\@by{\if@nonlatin نگارش\else By:\fi}
 \newtheorem{theorem}{قضیه}[chapter]
 \renewcommand\thetheorem{\thechapter\@SepMark\arabic{theorem}}
