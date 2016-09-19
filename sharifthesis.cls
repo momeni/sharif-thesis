@@ -115,6 +115,79 @@
 \newtheorem{remark}[theorem]{تذکر}
 \newtheorem{example}[theorem]{نمونه}
 
+\newcommand{\raisedrule}[2][0em]{\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\copyrightform}[2]{%
+\begin{minipage}{\linewidth}\setlength{\baselineskip}{0.85cm}\normalfont
+\st@logo\hspace{2cm}
+\begin{minipage}{7cm}\centering\vspace*{-1.5cm}
+\textbf{\large اظهارنامه}\\
+(اصالت متن و محتوای #1‌ی #2)
+\end{minipage}
+
+عنوان #1:
+\raisedrule{0.4pt}
+
+~
+\raisedrule{0.4pt}
+
+نام استاد راهنما:
+\raisedrule{0.4pt}
+نام استاد راهنمای هم‌کار:
+\raisedrule{0.4pt}
+نام استاد مشاور:
+\raisedrule{0.4pt}
+
+این‌جانب
+\raisedrule{0.4pt}
+اظهار می‌دارم:
+\hfill~
+
+\شروع{شمارش}
+	\باره متن و نتایج علمی ارایه‌شده در این #1 اصیل بوده و منحصراً توسط این‌جانب و زیر نظر استادان (راهنما، هم‌کار و مشاور) نام‌برده‌شده در بالا تهیه شده است.
+	\باره متن #1 به این صورت در هیچ جای دیگری منتشر نشده است.
+	\باره متن و نتایج مندرج در این #1، حاصل تحقیقات این‌جانب به عنوان دانشجوی #2 دانشگاه صنعتی شریف است.
+	\باره کلیه‌ی مطالبی که از منابع دیگر در این #1 مورد استفاده قرار گرفته، با ذکر مرجع مشخص شده است.
+\پایان{شمارش}
+
+{\par\vskip1\bigskipamount}
+\hspace*{9cm}
+\begin{minipage}{6cm}
+نام دانشجو:
+\raisedrule{0.4pt}
+
+\vspace*{0.3cm}
+تاریخ:
+
+\vspace*{0.3cm}
+امضاء:
+\end{minipage}{\par\vskip2\bigskipamount}
+
+نتایج تحقیقات مندرج در این #1 و دستاوردهای مادی و معنوی ناشی از آن (شامل فرمول‌ها، نرم‌افزارها، سخت‌افزارها و مواردی که قابلیت ثبت اختراع دارد) متعلق به دانشگاه صنعتی شریف است. هیچ شخصیت حقیقی یا حقوقی بدون کسب اجازه از دانشگاه صنعتی شریف حق فروش و ادعای مالکیت مادی یا معنوی بر آن یا ثبت اختراع از آن را ندارد. همچنین کلیه‌ی حقوق مربوط به چاپ، تکثیر، نسخه‌برداری، ترجمه، اقتباس و نظایر آن در محیط‌های مختلف اعم از الکترونیکی، مجازی یا فیزیکی برای دانشگاه صنعتی شریف محفوظ است. نقل مطالب با ذکر ماخذ بلامانع است.
+
+{\par\vskip2\bigskipamount}
+\begin{minipage}{6cm}
+نام استادان راهنما:
+\raisedrule{0.4pt}
+
+\vspace*{0.3cm}
+تاریخ:
+
+\vspace*{0.3cm}
+امضاء:
+\end{minipage}\hfill
+\begin{minipage}{6cm}
+نام دانشجو:
+\raisedrule{0.4pt}
+
+\vspace*{0.3cm}
+تاریخ:
+
+\vspace*{0.3cm}
+امضاء:
+\end{minipage}
+\end{minipage}}
+
+
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
 \hbox{}
 \vspace*{\fill}
@@ -202,6 +275,7 @@
 \RequirePackage{xifthen}% Provides \isempty test which is used for glossary
 
 % equivalent commands and environments
+\eqcommand{اظهارنامه}{copyrightform}
 \eqcommand{دانشگاه}{university}
 \eqcommand{دانشگاه‌عادی}{normaluniversity}
 \eqcommand{موضوع}{subject}
