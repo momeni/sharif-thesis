@@ -21,7 +21,7 @@ The template is organized as follows:
 For compiling TeX files to PDF, issue **make** command. It compiles biber (a biblatex engine) for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and **make** to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
 
 ##License
-    Copyright © 2013-2016 Behnam Momeni
+    Copyright © 2013-2017 Behnam Momeni
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
