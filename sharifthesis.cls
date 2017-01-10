@@ -1,15 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2016/09/19 Sharif Thesis v1.3.0]
 
-\LoadClass[fontsize=12pt,
-	paper=A4,pagesize,
-	headsepline,
-	bibliography=totoc,
-	chapterprefix=true,
-	toc=indented]
-	{scrbook}
-
-
 \DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
 \def\@shortfordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M.Sc. Thesis\fi}}
 \DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin رساله به عنوان تحقق بخشی از شرایط دریافت درجه‌ی دکتری\else A dissertation submitted in partial fulfillment of the requirements for the Ph.D degree\fi}%
@@ -21,6 +12,13 @@
 \ProcessOptions\relax
 
 \RequirePackage{amsmath,amsthm,scrpage2,rotating,scrhack}
+\LoadClass[fontsize=12pt,
+	paper=A4,pagesize,
+	bibliography=totoc,
+	chapterprefix=true,
+	toc=indented]
+	{scrbook}
+
 
 \renewcommand\headfont{\small\itshape}
 \renewcommand*\sectfont{\normalcolor\bfseries}
