@@ -18,7 +18,8 @@
 	toc=indented]
 	{scrbook}
 
-\RequirePackage{amsmath,amsthm,scrpage2,rotating,scrhack}
+\RequirePackage{amsmath,amsthm,rotating,scrhack}
+\RequirePackage[headsepline=0.45pt]{scrlayer-scrpage}
 
 \renewcommand\headfont{\small\itshape}
 \renewcommand*\sectfont{\normalcolor\bfseries}
@@ -38,7 +39,7 @@
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter:~##1}{}}
 \renewcommand{\sectionmark}[1]{\markright{بخش~\thesection:~##1}}}
 
-\newcommand{\PrepareForBibliography}{\cleardoubleemptypage\pagestyle{plain}\backmatter}
+\newcommand{\PrepareForBibliography}{\cleardoubleemptypage\pagestyle{plain.ThesisPagestyle}\backmatter}
 
 \newcommand{\PrepareForLatinPages}{\cleardoubleemptypage\pagestyle{empty}\latin}
 
@@ -207,43 +208,15 @@
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 
-\newpagestyle{pagenumberonlyPagestyle}
-{% header definition
-	(0pt,0pt)
-	{}{}{}
-	(0pt,0pt)
-}{% footer definition
-	(0pt,0pt)
-	{\hfill\pagemark\hfill}% even pages
-	{\hfill\pagemark\hfill}% odd pages
-	{\hfill\pagemark\hfill}% one-sided layout pages
-	(0pt,0pt)
-}
-\renewpagestyle{plain}
-{% header definition
-	(0pt,0pt)
-	{}{}{}
-	(0pt,0pt)
-}{% footer definition
-	(0pt,0pt)
-	{\hfill\pagemark\hfill}% even pages
-	{\hfill\pagemark\hfill}% odd pages
-	{\hfill\pagemark\hfill}% one-sided layout pages
-	(0pt,0pt)
-}
-\newpagestyle{ThesisPagestyle}
-{% header definition
-	(0pt,0pt)
-	{\leftmark\hfill}% even pages
-	{\hfill\rightmark}% odd pages
-	{\leftmark\hfill\rightmark}% one-sided layout pages
-	(\textwidth,0.45pt)
-}{% footer definition
-	{\hfill\pagemark\hfill}% even pages
-	{\hfill\pagemark\hfill}% odd pages
-	{\hfill\pagemark\hfill}% one-sided layout pages
-	(0pt,0pt)
-}
+\if@twoside%
+\newpairofpagestyles{ThesisPagestyle}{
+	\lehead{\leftmark}\rohead{\rightmark}
+	\cefoot*{\pagemark}\cofoot*{\pagemark}
+}\else%
+\newpairofpagestyles{ThesisPagestyle}{
+	\lohead{\leftmark}\rohead{\rightmark}
+	\cofoot*{\pagemark}
+}\fi
 
 \RequirePackage[table]{xcolor}
 % Colors for hyperref
@@ -262,7 +235,6 @@
 \RequirePackage{url}
 % The order of package inclusions is important
 \RequirePackage[localise]{xepersian}
-
 
 %% Define a new 'leo' style for the package that will use a smaller font.
 \def\url@leostyle{%

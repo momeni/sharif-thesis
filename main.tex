@@ -86,7 +86,7 @@
 \StartDocument
 %\makethesistitle
 
-\pagestyle{pagenumberonlyPagestyle}
+\pagestyle{plain.ThesisPagestyle}
 % following parts are not required in PhD proposal and should be removed. BEGIN OF COMMENT FOR PhD Proposal........
 %صفحه‌ی تصویب در پیشنهاد پژوهشی وجود ندارد.
 \شروع{تصویب}
@@ -105,7 +105,7 @@
 \setlength{\baselineskip}{0.9cm}
 \begin{comment}
 \فصل*{پیش‌گفتار}
-\thispagestyle{pagenumberonlyPagestyle}
+\thispagestyle{plain.ThesisPagestyle}
 پیشگفتار اختیاری است. در صورت تمایل به نگارش پیش‌گفتار، محیط کامنت که آن را دربرگرفته باید حذف شود.
 \end{comment}
 
@@ -125,6 +125,7 @@
 
 
 \PrepareForMainContent
+\pagestyle{ThesisPagestyle}
 \input{general/thesis_content}
 
 
