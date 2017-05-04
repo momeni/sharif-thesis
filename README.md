@@ -1,8 +1,8 @@
-#Sharif Thesis
+# Sharif Thesis
 
 This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://sharif.edu/~library/Guide_Theses.pdf). All SUT's theses are supposed to be written in Persian. The [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package is employed for typesetting Persian text. And scrbook is used as the base document class for the sharifthesis document class.
 
-##Template Organization
+## Template Organization
 The template is organized as follows:
  * sharifthesis.cls: The document class. Probably you don't need to read it for writing your thesis,
  * main.tex: The main file. Read it carefully. Approximately all lines must be changed to reproduce your thesis information like keywords, title, advisor professor, and so on,
@@ -17,10 +17,10 @@ The template is organized as follows:
  * resources: Includes resources.bib for citations. You may want to save PDF of used resources in that folder too,
  * one folder for each chapter of the thesis including a .tex file with the same name. For example find the introduction and future\_work folders.
 
-##Compilation
+## Compilation
 For compiling TeX files to PDF, issue **make** command. It compiles biber (a biblatex engine) for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and **make** to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
 
-##License
+## License
     Copyright © 2013-2017 Behnam Momeni
 
     This program is free software: you can redistribute it and/or modify
@@ -36,6 +36,5 @@ For compiling TeX files to PDF, issue **make** command. It compiles biber (a bib
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-##Acknowledgments
+## Acknowledgments
 I want to acknowledge works of Mr. Sadegh Dorri for his code which was the corner stone helping to build this template and his ideas and TeX codes continuing to improve this template. I also want to thank Mr. Vafa Khalighi for his great work with [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package. Most of TeX-based Persian documents owe to him :) At last, I should thank all the helpful people that I forgot to mention here (if you want to have your name listed here, drop an email).
-
