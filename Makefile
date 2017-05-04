@@ -54,6 +54,7 @@ $(SRC).pdf: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
 	#makeglossaries $(SRC)
 	$(TEX) $(TEXOPTIONS) $<
 	while grep --fixed-strings "Rerun to" $(SRC).log || grep --fixed-strings "Please rerun LaTeX" $(SRC).log ; do $(TEX) $(TEXOPTIONS) $< ; done
+	$(TEX) $(TEXOPTIONS) $<
 	@echo -e "===========================\nWarnings:\n"
 	@grep 'Warning\|Error\|Underful\|Overful' $(SRC).log | sort
 
