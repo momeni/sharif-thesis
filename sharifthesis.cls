@@ -296,7 +296,7 @@
 \newglossarystyle{persian-to-english}{%
 %	\glossarystyle{listdotted}% the base style
 	\renewenvironment{theglossary}%
-		{\begin{multicols}{2}\begingroup \flushleft }%
+		{\begin{multicols}{2}\begingroup \flushleft \linespread{1.8}\selectfont}%
 		{\endgroup \end{multicols}}%
 	\renewcommand*{\glossaryheader}{}%
 	\renewcommand*{\glsgroupheading}[1]{}%
@@ -313,7 +313,7 @@
 }
 \newglossarystyle{english-to-persian}{%
 	\renewenvironment{theglossary}%
-		{\begin{multicols}{2}\begingroup \flushright }%
+		{\begin{multicols}{2}\begingroup \flushright \linespread{1.8}\selectfont}%
 		{\endgroup \end{multicols}}%
 	\renewcommand*{\glossaryheader}{}%
 	\renewcommand*{\glsgroupheading}[1]{}%
@@ -395,6 +395,7 @@
 	\addcontentsline{toc}{chapter}{#1} % add a line in the Table of Contents (first option, toc), it will be like the ones 
 	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
 	\begin{latin}%
+	\LTRmulticolcolumns
 	\printglossary[type={e2p-terms},style={english-to-persian},title={\rl{#1}}]%
 	\end{latin}%
 }}
