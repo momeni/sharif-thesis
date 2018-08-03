@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sharifthesis}[2017/08/03 Sharif Thesis v1.5.0]
+\ProvidesClass{sharifthesis}[2017/08/03 Sharif Thesis v1.5.1]
 
 \DeclareOption{MScThesis}{\def\@partialfulfillment{\if@nonlatin این پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد است.\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
 \def\@fordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M. Sc. Thesis\fi}}
