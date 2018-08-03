@@ -1,6 +1,6 @@
 # Sharif Thesis
 
-This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://sharif.edu/~library/Guide_Theses.pdf). All SUT's theses are supposed to be written in Persian. The [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package is employed for typesetting Persian text. And scrbook is used as the base document class for the sharifthesis document class.
+This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://library.sharif.ir/c/document_library/get_file?uuid=fafd46dd-aa75-46e0-8087-5f5186a260c1&groupId=738621). All SUT's theses are supposed to be written in Persian. The [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package is employed for typesetting Persian text. And scrbook is used as the base document class for the sharifthesis document class.
 
 ## Template Organization
 The template is organized as follows:
@@ -21,7 +21,7 @@ The template is organized as follows:
 For compiling TeX files to PDF, issue **make** command. It compiles biber (a biblatex engine) for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just run XeLaTeX one time. For most the time, it's not important to have an updated glossary or references list. So you can **make once** by default and **make** to obtain the really final version. BTW, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
 
 ## License
-    Copyright © 2013-2017 Behnam Momeni
+    Copyright © 2013-2018 Behnam Momeni
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
