@@ -1,9 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2017/08/22 Sharif Thesis v1.4.1]
 
-\DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
+\DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin این پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد است.\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
 \def\@shortfordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M.Sc. Thesis\fi}}
-\DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin رساله به عنوان تحقق بخشی از شرایط دریافت درجه‌ی دکتری\else A dissertation submitted in partial fulfillment of the requirements for the Ph.D degree\fi}%
+\DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin این رساله به عنوان تحقق بخشی از شرایط دریافت درجه‌ی دکتری است.\else A dissertation submitted in partial fulfillment of the requirements for the Ph.D degree\fi}%
 \def\@shortfordegree{\if@nonlatin رساله‌ی دکتری\else Ph.D. Dissertation\fi}}
 \DeclareOption{PhDProposal}{\def\@fordegree{\if@nonlatin پیشنهاد پژوهشی دکتری\else Ph.D. Research Proposal\fi}}
 
@@ -54,11 +54,11 @@
 \newenvironment{تصویب}
 {\def\BigSkip{\par\vskip6\bigskipamount}\def\SmallSkip{\par\vskip2\bigskipamount}
 \def\dashes{\tiny\normalcolor.. ... .. ... .. ... ... .. ... .. ... .. ... ...}
-\def\signat{\normalfont\bfseries امضاء\dashes\\[1cm]}
+\def\signat{\normalfont\bfseries امضاء\dashes\vspace{.7cm}\\}
 \def\داور%
 ##1##2{{\normalfont\bfseries ##1:} & {\large##2} & \signat}
 \cleardoubleemptypage\begin{center}
-\normalfont\bfseries تصویب‌نامه\SmallSkip به نام خدا\\\st@normaluniversity\BigSkip{\large\@shortfordegree}
+\normalfont\bfseries تصویب‌نامه\SmallSkip به نام خدا\\\st@normaluniversity\BigSkip{\large\@shortfordegree}\\\SmallSkip{\large\if@nonlatin\mbox{\@fordegree}\else\@fordegree\fi}
 \end{center}\SmallSkip\begin{tabular}{rr}
 {\normalfont\bfseries عنوان:} & {\large\st@title} \\[\medskipamount]
 {\normalfont\bfseries \@by:} & {\large\st@author}
@@ -75,7 +75,7 @@
 \def\makethesistitle{
   \def\@titlepagesize{\Large\normalfont}
   \def\@titlehead{\centering\st@logo\\\smallskip\large\st@university}
-  \def\@subject{\vskip0.1cm\if@nonlatin\mbox{\@fordegree}\else\@fordegree\fi\\\if@nonlatin گرایش \fi\st@subject}
+  \def\@subject{\vskip0.1cm\if@nonlatin رشته \fi\st@subject}
   \ifx\st@titlelineone\undefined
     \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@title}}
   \else
@@ -84,7 +84,7 @@
   \def\@author{{\@titlepagesize\@by}\\{\st@author} \\[2\bigskipamount]%
     {\@titlepagesize\@undersup}\\{\st@supervisor}%
     \ifdefined\st@consult\\[3\bigskipamount]{\@titlepagesize\@undercons}\\{\st@consult}\if@nonlatin\\[3\bigskipamount]\else\\[4\bigskipamount]\fi\else\if@nonlatin\\[6\bigskipamount]\else\\[7\bigskipamount]\fi\fi}
-  \def\@date{\ifdefined\st@date\st@date\else\if@nonlatin\today\else\latintoday\fi\fi\vspace{-100pt}}
+  \def\@date{\vspace{100pt}\ifdefined\st@date\st@date\else\if@nonlatin\today\else\latintoday\fi\fi\vspace{-100pt}}
   \origin@lmaketitle
   \newcommand\date[1]{\def\st@date{##1}}
   \newcommand\title[1]{\def\st@title{##1}}
@@ -230,6 +230,8 @@
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
 \RequirePackage[xindy]{glossaries} % must be after hyperref for links.
+
+\RequirePackage{harveyballs}
 
 \RequirePackage{multicol,float,array}
 \RequirePackage{url}
