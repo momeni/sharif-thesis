@@ -1,13 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sharifthesis}[2017/08/03 Sharif Thesis v1.5.0]
 
-\DeclareOption{MScThesis}{\def\@fordegree{\if@nonlatin این پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد است.\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
-\def\@shortfordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M.Sc. Thesis\fi}}
-\DeclareOption{PhDThesis}{\def\@fordegree{\if@nonlatin این رساله به عنوان تحقق بخشی از شرایط دریافت درجه‌ی دکتری است.\else A dissertation submitted in partial fulfillment of the requirements for the Ph.D degree\fi}%
-\def\@shortfordegree{\if@nonlatin رساله‌ی دکتری\else Ph.D. Dissertation\fi}}
-\DeclareOption{PhDProposal}{\def\@fordegree{\if@nonlatin پیشنهاد پژوهشی دکتری\else Ph.D. Research Proposal\fi}}
+\DeclareOption{MScThesis}{\def\@partialfulfillment{\if@nonlatin این پایان‌نامه به عنوان تحقق بخشی از شرایط دریافت درجه‌ی کارشناسی ارشد است.\else A thesis submitted in partial fulfillment of the requirements for the M.Sc. degree\fi}%
+\def\@fordegree{\if@nonlatin پایان‌نامه‌ی کارشناسی ارشد\else M. Sc. Thesis\fi}}
+
+\DeclareOption{PhDThesis}{\def\@partialfulfillment{\if@nonlatin این رساله به عنوان تحقق بخشی از شرایط دریافت درجه‌ی دکتری است.\else A dissertation submitted in partial fulfillment of the requirements for the Ph.D degree\fi}%
+\def\@fordegree{\if@nonlatin رساله‌ی دکتری\else Ph.D Dissertation\fi}}
+
+\DeclareOption{PhDProposal}{\def\@fordegree{\if@nonlatin پیشنهاد پژوهشی دکتری\else Ph.D Research Proposal\fi}}
+
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+
 
 \ProcessOptions\relax
 
@@ -58,7 +62,7 @@
 \def\داور%
 ##1##2{{\normalfont\bfseries ##1:} & {\large##2} & \signat}
 \cleardoubleemptypage\begin{center}
-\normalfont\bfseries تصویب‌نامه\SmallSkip به نام خدا\\\st@normaluniversity\BigSkip{\large\@shortfordegree}\\\SmallSkip{\large\if@nonlatin\mbox{\@fordegree}\else\@fordegree\fi}
+\normalfont\bfseries تصویب‌نامه\SmallSkip به نام خدا\\\st@normaluniversity\BigSkip{\large\@fordegree}\\\SmallSkip{\large\if@nonlatin\mbox{\@partialfulfillment}\else\@partialfulfillment\fi}
 \end{center}\SmallSkip\begin{tabular}{rr}
 {\normalfont\bfseries عنوان:} & {\large\st@title} \\[\medskipamount]
 {\normalfont\bfseries \@by:} & {\large\st@author}
@@ -75,7 +79,7 @@
 \def\makethesistitle{
   \def\@titlepagesize{\Large\normalfont}
   \def\@titlehead{\centering\st@logo\\\smallskip\large\st@university}
-  \def\@subject{\vskip0.1cm\if@nonlatin رشته \fi\st@subject}
+  \def\@subject{\vskip0.1cm\@fordegree\\\if@nonlatin گرایش \fi\st@subject}
   \ifx\st@titlelineone\undefined
     \def\@title{\vskip0.1cm{\@titlepagesize\@thetitle\\}{\st@title}}
   \else
