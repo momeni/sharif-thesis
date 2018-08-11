@@ -9,6 +9,16 @@
 \usepackage{paralist}
 \usepackage{textcomp}
 \usepackage{ctable}% for tables (it provides table-notes and imports booktabs package too)
+\usepackage{siunitx} % for S column type in tables
+\usepackage{bidipoem} % for traditionalpoem environment
+
+%% customize dictum format:
+\setkomafont{dictumtext}{\itshape\small\color{gray}}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\raggeddictum{\raggedleft}
+\renewcommand*\dictumwidth{0.4\linewidth}
+\renewcommand*\dictumauthorformat[1]{\centering\rl{--- #1}}
+\renewcommand*\dictumrule{}
 
 \newcounter{tablerow}
 \renewcommand{\arraystretch}{1.5}
