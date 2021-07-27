@@ -214,11 +214,11 @@
 
 \if@twoside%
 \newpairofpagestyles{ThesisPagestyle}{
-	\lehead{\leftmark}\rohead{\rightmark}
+	\lehead{\leftmark\hfill}\rohead{\hfill\rightmark}
 	\cefoot*{\pagemark}\cofoot*{\pagemark}
 }\else%
 \newpairofpagestyles{ThesisPagestyle}{
-	\lohead{\leftmark}\rohead{\rightmark}
+	\lohead{\leftmark\hfill}\rohead{\hfill\rightmark}
 	\cofoot*{\pagemark}
 }\fi
 
@@ -240,7 +240,8 @@
 \RequirePackage{multicol,float,array}
 \RequirePackage{url}
 % The order of package inclusions is important
-\RequirePackage[localise]{xepersian}
+%\RequirePackage[localise]{xepersian}
+\RequirePackage{xepersian-fix}
 
 %% Define a new 'leo' style for the package that will use a smaller font.
 \def\url@leostyle{%
@@ -290,10 +291,9 @@
 \defpersianfont\نستعلیق[Scale=1]{IranNastaliq}
 \defpersianfont\نستعلیق‌درشت[Scale=5]{IranNastaliq}
 
-\renewcommand{\listfigurename}{فهرست شکل‌ها}
-\renewcommand{\listtablename}{فهرست جدول‌ها}
-\renewcommand{\contentsname}{سرخط‌ها}
-
+\newcaptionname{english}{\listfigurename}{فهرست شکل‌ها}
+\newcaptionname{english}{\listtablename}{فهرست جدول‌ها}
+\newcaptionname{english}{\contentsname}{سرخط‌ها}
 
 % Glossary
 
@@ -421,6 +421,15 @@
 {\emph{#2}\LTRfootnote{#3}}% if #1 is empty
 {\emph{#2}\LTRfootnote{#3; #1}}% if #1 is not empty
 }
+
+% Fix for https://github.com/persiantex/bidi/issues/7
+\RequirePackage{xpatch}
+\xpatchcmd\scr@dte@tocline
+  {\@nameuse{scr@tso@#1@pagenumberbox}}
+  {\expandafter\let\expandafter\scr@dte@pagenumberwidth
+   \csname scr@tso@#1@pagenumberwidth\endcsname
+   \@nameuse{scr@tso@#1@pagenumberbox}}
+  {}{\fail}
 
 %abbreviation support may be added here...
 

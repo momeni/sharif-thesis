@@ -70,7 +70,8 @@
 {نام}
 % ===== END OF DEPRACATED AREA =====
 
-\شروع{نوشتار}
+%\شروع{نوشتار}
+\begin{document}
 
 
 \newcommand{\StartDocument}{\frontmatter \baselineskip1.2\baselineskip \pagestyle{empty} \null \vfill
@@ -83,9 +84,11 @@
 %for non final version, you can leave following commands as is to create only one title page (printed on paper)
 %for final version you need to swap folowing commented/uncommented makethesistitle commands to achieve this order: title on the cover THEN in the name of god page THEN another title page but this time printed on paper
 \makethesistitle
+\pagenumbering{gobble}
 \StartDocument
 %\makethesistitle
 
+\pagenumbering{harfi}
 \pagestyle{plain.ThesisPagestyle}
 % following parts are not required in PhD proposal and should be removed. BEGIN OF COMMENT FOR PhD Proposal........
 %صفحه‌ی تصویب در پیشنهاد پژوهشی وجود ندارد.
@@ -125,6 +128,7 @@
 
 
 \PrepareForMainContent
+\pagenumbering{arabic}
 \pagestyle{ThesisPagestyle}
 \input{general/thesis_content}
 
@@ -151,6 +155,7 @@
 
 
 \PrepareForLatinPages
+\pagenumbering{gobble}
 \date{August 2018}
 \logo{\includegraphics[scale=.4]{logo-en}}
 \title{\sffamily\enTitle}
@@ -167,4 +172,5 @@
 \input{general/abstract-en}
 \end{abstract}
 \makethesistitle
-\پایان{نوشتار}
+%\پایان{نوشتار}
+\end{document}

@@ -1,0 +1,61 @@
+%----------------
+% Gist: https://gist.github.com/majid-vaghari/3986f3643d5fbe5b4e10b954f1ab9115
+% this is a temporary fix https://github.com/persiantex/bidi/issues/18#issuecomment-705747749
+
+\let\olddocument\document
+\RequirePackage[localise]{xepersian}
+\let\document\olddocument
+
+\@ifl@t@r\fmtversion{2020/10/01}{%
+ \AddToHook{begindocument/before}{%
+ \let\bidi@AtEndPreamble\@firstofone
+  \bidi@endpreamblehook
+  \protected\def\bidi@AtEndPreamble{\@notprerr\@gobble}%
+  \bidi@undef\bidi@endpreamblehook}
+   \AddToHook{begindocument/end}{%
+  \let\bidi@AfterEndPreamble\@firstofone
+  \bidi@afterendpreamblehook
+  \protected\def\bidi@AfterEndPreamble{\@notprerr\@gobble}%
+  \bidi@undef\bidi@afterendpreamblehook
+  \ignorespaces}
+  \bidi@patchcmd\enddocument
+  {\fi
+   \UseHook{enddocument/afteraux}%
+  }
+  {\let\bidi@AfterEndDocumentCheckLabelsRerun\@firstofone
+   \bidi@afterenddocumentchecklabelsrerunhook
+   \fi
+   \UseHook{enddocument/afteraux}%
+   }
+   {}
+   {}
+ }{%
+\bidi@preto\document{%
+  \endgroup
+  \let\bidi@AtEndPreamble\@firstofone
+  \bidi@endpreamblehook
+  \protected\def\bidi@AtEndPreamble{\@notprerr\@gobble}%
+  \bidi@undef\bidi@endpreamblehook
+  \begingroup}
+\bidi@appto\document{%
+  \let\bidi@AfterEndPreamble\@firstofone
+  \bidi@afterendpreamblehook
+  \protected\def\bidi@AfterEndPreamble{\@notprerr\@gobble}%
+  \bidi@undef\bidi@afterendpreamblehook
+  \ignorespaces}
+}
+%---------------------
+
+%-----------------
+% this is a temporary fix as stated in https://github.com/persiantex/xepersian/issues/17#issuecomment-709956867
+\ExplSyntaxOn
+\cs_set_eq:NN
+\etex_iffontchar:D
+\tex_iffontchar:D
+\cs_undefine:N \c_one
+\int_const:Nn \c_one { 1 }
+\ExplSyntaxOff
+%------------------
+
+% you can add this file to your project and then instead of importing
+% xepersian package import like this: \usepackage{xepersian-fix}
