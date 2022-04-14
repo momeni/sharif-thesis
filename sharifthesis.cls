@@ -240,8 +240,7 @@
 \RequirePackage{multicol,float,array}
 \RequirePackage{url}
 % The order of package inclusions is important
-%\RequirePackage[localise]{xepersian}
-\RequirePackage{xepersian-fix}
+\RequirePackage[localise]{xepersian}
 
 %% Define a new 'leo' style for the package that will use a smaller font.
 \def\url@leostyle{%
