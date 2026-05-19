@@ -448,6 +448,8 @@
 \eqcommand{رچ}{rl}
 \eqcommand{چر}{lr}
 
+% The فقرات and فقره environment and command are defined by xepersian
+% however, بارهها and باره are preferred due to their Persian roots.
 \eqcommand{بارهها}{itemize}
 \eqcommand{باره}{item}
 
