@@ -278,9 +278,24 @@
 \def\pageautorefname{صفحهٔ}
 \def\footnoteautorefname{پاورقی}
 
+% If you cannot install fonts by your system packages,
+% an alternative is to copy them in a local folder like "fonts/"
+% and then specify it by "Path" option as follows:
+%
+%\settextfont[
+%  Path=fonts/,
+%  Scale=1.09,
+%  UprightFont = *.ttf,                % regular
+%  BoldFont = * Bold.ttf,              % bold
+%  ItalicFont = * Italic.ttf,          % italic
+%  BoldItalicFont = * Bold Italic.ttf  % bold italic
+%]{XBZar}
+
 \settextfont[Scale=1]{XBZar}
 %\setlatintextfont[Scale=1]{Linux Libertine}
 \setlatintextfont[Scale=1]{Libertinus Serif}
+% The Yas font is chosen for its "hollow zero" Persian number.
+% Other fonts, e.g., XB Niloofar, do not render Persian zero correctly.
 \setdigitfont{Yas}
 
 \interfootnotelinepenalty=10000 % prevent LaTeX from splitting footnotes across pages
