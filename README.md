@@ -1,6 +1,6 @@
 # Sharif Thesis
 
-This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://library.sharif.ir/c/document_library/get_file?uuid=fafd46dd-aa75-46e0-8087-5f5186a260c1&groupId=738621). All SUT's theses are supposed to be written in Persian. The [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package is employed for typesetting Persian text. And scrbook is used as the base document class for the sharifthesis document class.
+This project provides a template for writing thesis in XeLaTeX according to the style of Sharif University of Technology ([SUT](http://sharif.edu/)). The base description of the thesis style is made available by the [Central Library of the University](http://library.sharif.ir/c/document_library/get_file?uuid=fafd46dd-aa75-46e0-8087-5f5186a260c1&groupId=738621). All SUT's theses are supposed to be written in Persian. The [XePersian](https://www.ctan.org/pkg/xepersian) package is employed for typesetting Persian text. And scrbook is used as the base document class for the sharifthesis document class.
 
 ## Template Organization
 The template is organized as follows:
@@ -18,10 +18,10 @@ The template is organized as follows:
  * one folder for each chapter of the thesis including a .tex file with the same name. For example find the introduction and future\_work folders.
 
 ## Compilation
-For compiling TeX files to PDF, issue **make** command. It compiles biber (a biblatex engine) for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. In sake of fast compilation, you can use **make once** which just runs XeLaTeX one time. While the thesis is not finalized, it's not important to always have an updated glossary or references list. So you can **make once** by default and **make** to obtain the final version. By the way, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
+For compiling TeX files to PDF, issue **make** command. It compiles biber (a biblatex engine) for references, xindy for two glossaries, and XeLaTeX for the PDF file itself. It compiles as many times as required to get all cross-links correctly compiled. For sake of fast compilation, you can use **make once** which just runs XeLaTeX once. While the thesis is not finalized, it's not important to always have an updated glossary or references list. So you can **make once** by default and **make** to obtain the final version. By the way, you need to **make** for the first time. Because with empty glossaries, **make once** won't succeed. Also you should add name of all TeX files to the *TEX0* variable in the Makefile.
 
 ## License
-    Copyright © 2013-2022 Behnam Momeni
+    Copyright © 2013-2026 Behnam Momeni
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,6 +35,10 @@ For compiling TeX files to PDF, issue **make** command. It compiles biber (a bib
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
+
+## Alternatives
+
+Another notable thesis template is maintained by Dr. Zarrabi in this [repository](https://github.com/zarrabi/thesis-template).
 
 ## Acknowledgments
 I want to acknowledge works of Mr. Sadegh Dorri for his code which was the corner stone helping to build this template and his ideas and TeX codes continuing to improve this template. I also want to thank Mr. Vafa Khalighi for his great work with [XePersian](http://www.ctan.org/tex-archive/macros/xetex/latex/xepersian) package. Most of TeX-based Persian documents owe to him :) At last, I should thank all the helpful people that I forgot to mention here (if you want to have your name listed here, drop an email).
