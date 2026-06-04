@@ -38,7 +38,7 @@
 \RequirePackage[left=2.5cm,bottom=2.5cm,right=3cm,top=3cm,footskip=1cm]{geometry}
 \sloppy\parindent1.5em
 
-
+\counterwithin*{equation}{chapter}
 \newcommand{\PrepareForMainContent}{\cleardoubleemptypage\pagestyle{ThesisPagestyle}\mainmatter%
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter:~##1}{}}
 \renewcommand{\sectionmark}[1]{\markright{بخش~\thesection:~##1}}}
