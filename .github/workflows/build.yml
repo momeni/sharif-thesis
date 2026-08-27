@@ -1,0 +1,45 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  # Pinned, and expected to pass. This is the version the template was last
+  # adjusted for.
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:TL2025-historic
+    steps:
+      - uses: actions/checkout@v4
+
+      # XBZar, Yas and IranNastaliq are not free and cannot be installed here, so
+      # a font that ships with TeX Live is presented under those names. This is
+      # enough to prove the document still compiles; it is not what it looks like.
+      - name: Stand-in fonts
+        run: |
+          amiri=$(fc-list | grep -m1 Amiri-Regular.ttf | cut -d: -f1)
+          python3 .github/ci/stand-in-fonts.py "$amiri" /usr/local/share/fonts/standin
+          fc-cache -f
+
+      - name: Build
+        run: make
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: main.pdf
+          path: main.pdf
+
+  # Unpinned, and allowed to fail. This is the early warning: when a new TeX Live
+  # breaks the template, this job says so before a student reports it.
+  latest:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stand-in fonts
+        run: |
+          amiri=$(fc-list | grep -m1 Amiri-Regular.ttf | cut -d: -f1)
+          python3 .github/ci/stand-in-fonts.py "$amiri" /usr/local/share/fonts/standin
+          fc-cache -f
+      - name: Build
+        run: make
