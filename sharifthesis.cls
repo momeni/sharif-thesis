@@ -230,7 +230,7 @@
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
-\RequirePackage[xindy]{glossaries} % must be after hyperref for links.
+\RequirePackage[xindy,acronym]{glossaries} % must be after hyperref for links.
 
 \RequirePackage{harveyballs}
 
@@ -419,7 +419,7 @@
 }}
 
 % Reset the first-use flag of the transaltion glossareis
-\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms]}
+\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms,\acronymtype]}
 
 %\ترجمه[نمونه‌های]{نمونه}{example}
 \newcommand{\trans}[3][]{% params: [actual form]{persian}{english}
@@ -443,7 +443,57 @@
    \@nameuse{scr@tso@#1@pagenumberbox}}
   {}{\fail}
 
-%abbreviation support may be added here...
+% abbreviation support
+% An abbreviation has three parts: the abbreviation itself, the Persian wording
+% used when it is first mentioned, and the English wording listed in the front
+% matter. \abbrv prints the Persian wording followed by the abbreviation on
+% first use and the abbreviation alone afterwards, so that the body of the
+% thesis stays Persian. \printabbrevations lists them.
+%
+% The abbreviation is wrapped in \lr to keep it left to right inside Persian
+% text, while sort= keeps the bare form so that xindy orders the list by the
+% abbreviation rather than by the markup.
+
+%\newabbrv{EEG}{الکترومغزنگاره}{Electroencephalogram}
+\newcommand{\newabbrv}[4][]{% params: [key]{abbreviation}{persian}{english}
+\ifthenelse{\isempty{#1}}{\def\key{#2}}{\def\key{#1}}%
+\newglossaryentry{ac:\key}{type={\acronymtype}, sort={#2}, name={\lr{#2}},
+description={#4}, text={\lr{#2}}, first={\emph{#3} (\lr{#2})}}%
+}
+
+%\abbrv{EEG}
+\newcommand{\abbrv}[1]{\gls{ac:#1}}
+
+% The list itself is Latin on both sides, so it is set left to right.
+\newglossarystyle{abbreviations}{%
+	\renewenvironment{theglossary}%
+		{\begin{latin}\begingroup\raggedright}%
+		{\endgroup\end{latin}}%
+	\renewcommand*{\glossaryheader}{}%
+	\renewcommand*{\glsgroupheading}[1]{}%
+	\renewcommand*{\glsgroupskip}{}%
+	% \glossentry{label}{numberlist}
+	\renewcommand*{\glossentry}[2]{%
+		\glstarget{##1}{\glossentryname{##1}}% the abbreviation
+		\dotfill%dots
+		\space \glossentrydesc{##1} \\% its English wording
+	}%
+	\renewcommand*{\subglossentry}[3]{%
+		\glossentry{##2}{##3}%
+	}%
+}
+
+% xindy only writes the .acr file when an abbreviation has actually been used, so
+% a thesis without any gets no heading and no entry in the table of contents.
+\newcommand{\st@printabbrevations}[1]{{%
+	\phantomsection % hyperref: enable hyperlinking from the table of contents to this point
+	\addcontentsline{toc}{chapter}{#1}%
+	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
+	\printglossary[type=\acronymtype,style={abbreviations},title={#1}]%
+}}
+\newcommand{\printabbrevations}[1][کوته‌نوشت‌ها]{%
+	\IfFileExists{\jobname.acr}{\st@printabbrevations{#1}}{}%
+}
 
 \eqcommand{رچ}{rl}
 \eqcommand{چر}{lr}
@@ -456,6 +506,9 @@
 \eqcommand{نوواژه}{newterm}
 \eqcommand{واژه}{term}
 \eqcommand{ترجمه}{trans}
+\eqcommand{نوکوته‌نوشت}{newabbrv}
+\eqcommand{کوته‌نوشت}{abbrv}
+\eqcommand{فهرست‌کوته‌نوشت‌ها}{printabbrevations}
 %مورد زیر در xepersian تعریف شده و نیازی به تعریف دوباره‌ی آن در اینجا نیست.
 %\eqcommand{نام}{name}
 
