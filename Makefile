@@ -4,7 +4,7 @@ SRC=main
 # Commands and options
 TEX=xelatex
 BIB=biber
-XINDY=xindy
+GLS=bib2gls
 
 # Output PDF minor version
 PDFMINORVER=5
@@ -44,14 +44,10 @@ img/%.pdf img/%.pdf_tex: img/%.svg
 
 # Build the main file
 $(SRC).pdf: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
-	rm -fv $(SRC).pdf $(SRC).bbl *.gls *.glo
+	rm -fv $(SRC).pdf $(SRC).bbl $(SRC).glstex
 	$(TEX) $(TEXOPTIONS) $<
 	$(BIB) $(SRC)
-	#$(XINDY) -L persian -C utf8 -I xindy -M $(SRC) -t $(SRC).glg -o $(SRC).gls $(SRC).glo
-	# variant1: Sorts آ and ا together, variant2: Separates them.
-	$(XINDY) --language persian --codepage variant1-utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).fa.glg --out-file $(SRC).fa.gls $(SRC).fa.glo
-	$(XINDY) --language english --codepage utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).en.glg --out-file $(SRC).en.gls $(SRC).en.glo
-	#makeglossaries $(SRC)
+	$(GLS) $(SRC)
 	$(TEX) $(TEXOPTIONS) $<
 	while grep --fixed-strings "Rerun to" $(SRC).log || grep --fixed-strings "Please rerun LaTeX" $(SRC).log ; do $(TEX) $(TEXOPTIONS) $< ; done
 	$(TEX) $(TEXOPTIONS) $<
@@ -70,7 +66,7 @@ markdown: TODO.markdown
 cleanall: clean cleansvg cleanfig
 
 clean:
-	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
+	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls *.glstex $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
 
 cleansvg:
 	rm -fv $(SVGOUT)

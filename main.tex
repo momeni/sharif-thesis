@@ -53,7 +53,7 @@
 \hyphenation{test}
 
 
-\makeglossaries
+% bib2gls collects the entries; \makeglossaries is not used in record mode
 %\includeonly{related_works/related_works}
 %\includeonly{evaluation/evaluation}
 
@@ -112,7 +112,8 @@
 
 \setlength{\baselineskip}{0.9cm}
 \pagenumbering{tartibi}\tableofcontents\listoftables\listoffigures
-%list of abbreviations may be added here...
+%If your thesis uses no abbreviations, comment following line
+\printabbrevations
 
 
 \PrepareForMainContent
