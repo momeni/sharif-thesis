@@ -230,7 +230,9 @@
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
-\RequirePackage[xindy,acronym]{glossaries} % must be after hyperref for links.
+\RequirePackage[record,abbreviations]{glossaries-extra} % must be after hyperref for links.
+% Entries are kept in a .bib file and sorted by bib2gls, which ships with TeX Live
+% and behaves identically on every platform. xindy is no longer needed.
 
 \RequirePackage{harveyballs}
 
@@ -347,14 +349,42 @@
 	}%
 }
 
-\newglossary{p2e-terms}{fa.gls}{fa.glo}{واژه‌نامه‌ی فارسی به انگلیسی} % persian to english
-\newglossary{e2p-terms}{en.gls}{en.glo}{English to Persian Glossary} % english to persian
+\newglossary*{p2e-terms}{واژه‌نامه‌ی فارسی به انگلیسی} % persian to english
+\newglossary*{e2p-terms}{English to Persian Glossary} % english to persian
 
+% Persian collation. The JVM has no fa collator, so an explicit rule is required:
+% the default would sort پ, چ, ژ, ک and گ after ی. The commas give آ and ا a shared
+% primary weight, which is the grouping xindy produced with variant1-utf8, and they
+% also fold the Arabic look-alikes ك, ي, ؤ and ة onto their Persian counterparts.
+\newcommand{\st@persiansortrule}{%
+< ا,آ,أ,إ,ٱ < ب < پ < ت < ث < ج < چ < ح < خ < د < ذ < ر < ز < ژ < س < ش < ص < ض < ط < ظ < ع < غ < ف < ق < ک,ك < گ < ل < م < ن < و,ؤ < ه,ة < ی,ي,ئ}
+
+% \loadglossaryterms{resources/terms}
+% Reads the .bib file of terms. Each @dualentry yields both a Persian to English
+% and an English to Persian entry, labelled fa:<key> and en:<key> so that the
+% \واژه and \ترجمه commands keep working exactly as before. Abbreviations are
+% read from the same file and labelled ac:<key>.
+\newcommand{\loadglossaryterms}[1]{%
+\GlsXtrLoadResources[%
+	src={#1},%
+	type={p2e-terms},dual-type={e2p-terms},%
+	label-prefix={fa:},dual-prefix={en:},%
+	match={entrytype=dualentry},%
+	sort={custom},sort-rule={\st@persiansortrule},%
+	dual-sort={en}%
+]%
+\GlsXtrLoadResources[%
+	src={#1},%
+	type={abbreviations},label-prefix={ac:},%
+	match={entrytype=abbreviation},%
+	sort={en}%
+]}
+
+% Terms now live in the .bib file read by \loadglossaryterms, so this only warns.
+% The convertgls2bib tool, shipped with bib2gls, converts an existing glossary file.
 \newcommand{\newterm}[3][]{% params: [key]{persian}{english}
-\ifthenelse{\isempty{#1}}{\def\key{#2}}{\def\key{#1}}%
-\newglossaryentry{en:\key}{type={e2p-terms}, name={#3}, description={#2}}% english glossary
-%\newglossaryentry{fa:\key}{type={p2e-terms}, name={#2}, plural={#4}, description={#3}}% persian glossary
-\newglossaryentry{fa:\key}{type={p2e-terms}, name={#2}, description={#3}}% persian glossary
+\PackageWarning{sharifthesis}{\string\newterm\space is obsolete; move the entry to
+the .bib file read by \string\loadglossaryterms\space (convertgls2bib does this for you)}%
 }
 
 \defglsentryfmt[p2e-terms]{%
@@ -403,28 +433,25 @@
 }
 
 \newcommand{\printpersianglossary}[1][واژه‌نامه‌ی فارسی به انگلیسی]{{%
-	\phantomsection % hyperref: enable hyperlinking from the table of contents to this point
-	\addcontentsline{toc}{chapter}{#1} % add a line in the Table of Contents (first option, toc), it will be like the ones 
+	% glossaries-extra adds the table of contents entry itself
 	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
-	\printglossary[type={p2e-terms},style={persian-to-english},title={#1}]%
+	\printunsrtglossary[type={p2e-terms},style={persian-to-english},title={#1}]%
 }}
 \newcommand{\printenglishglossary}[1][واژه‌نامه‌ی انگلیسی به فارسی]{{%
-	\phantomsection % hyperref: enable hyperlinking from the table of contents to this point
-	\addcontentsline{toc}{chapter}{#1} % add a line in the Table of Contents (first option, toc), it will be like the ones 
+	% glossaries-extra adds the table of contents entry itself
 	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
 	\begin{latin}%
 	\LTRmulticolcolumns
-	\printglossary[type={e2p-terms},style={english-to-persian},title={\rl{#1}}]%
+	\printunsrtglossary[type={e2p-terms},style={english-to-persian},title={\rl{#1}}]%
 	\end{latin}%
 }}
 
 % Reset the first-use flag of the transaltion glossareis
-\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms,\acronymtype]}
+\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms,abbreviations]}
 
 %\ترجمه[نمونه‌های]{نمونه}{example}
 \newcommand{\trans}[3][]{% params: [actual form]{persian}{english}
-\newterm{#2}{#3}% add to glossary
-\term[#1]{#2}% and cite it
+\term[#1]{#2}% the entry itself now comes from the .bib file
 }
 
 %\نام[نویسنده‌ی کتاب فلان]{اِسمیت}{Smith}
@@ -444,25 +471,21 @@
   {}{\fail}
 
 % abbreviation support
-% An abbreviation has three parts: the abbreviation itself, the Persian wording
-% used when it is first mentioned, and the English wording listed in the front
-% matter. \abbrv prints the Persian wording followed by the abbreviation on
-% first use and the abbreviation alone afterwards, so that the body of the
-% thesis stays Persian. \printabbrevations lists them.
-%
-% The abbreviation is wrapped in \lr to keep it left to right inside Persian
-% text, while sort= keeps the bare form so that xindy orders the list by the
-% abbreviation rather than by the markup.
+% glossaries-extra typesets abbreviations natively. With the long-short style the
+% long form, which is the Persian wording, is printed followed by the abbreviation
+% on first use, and the abbreviation alone afterwards, so that the body of the
+% thesis stays Persian. The description field carries the English wording, which
+% is what the list in the front matter shows.
+\setabbreviationstyle[abbreviation]{long-short}
 
-%\newabbrv{EEG}{الکترومغزنگاره}{Electroencephalogram}
-\newcommand{\newabbrv}[4][]{% params: [key]{abbreviation}{persian}{english}
-\ifthenelse{\isempty{#1}}{\def\key{#2}}{\def\key{#1}}%
-\newglossaryentry{ac:\key}{type={\acronymtype}, sort={#2}, name={\lr{#2}},
-description={#4}, text={\lr{#2}}, first={\emph{#3} (\lr{#2})}}%
-}
-
-%\abbrv{EEG}
+%\abbrv{DOI}
 \newcommand{\abbrv}[1]{\gls{ac:#1}}
+
+% Kept so that documents written against the previous release still compile.
+\newcommand{\newabbrv}[4][]{% params: [key]{abbreviation}{persian}{english}
+\PackageWarning{sharifthesis}{\string\newabbrv\space is obsolete; move the entry to
+the .bib file read by \string\loadglossaryterms\space as an @abbreviation}%
+}
 
 % The list itself is Latin on both sides, so it is set left to right.
 \newglossarystyle{abbreviations}{%
@@ -483,16 +506,15 @@ description={#4}, text={\lr{#2}}, first={\emph{#3} (\lr{#2})}}%
 	}%
 }
 
-% xindy only writes the .acr file when an abbreviation has actually been used, so
-% a thesis without any gets no heading and no entry in the table of contents.
+% A thesis which uses no abbreviation gets neither a heading nor a table of
+% contents entry.
 \newcommand{\st@printabbrevations}[1]{{%
-	\phantomsection % hyperref: enable hyperlinking from the table of contents to this point
-	\addcontentsline{toc}{chapter}{#1}%
+	% glossaries-extra adds the table of contents entry itself
 	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
-	\printglossary[type=\acronymtype,style={abbreviations},title={#1}]%
+	\printunsrtglossary[type=abbreviations,style={abbreviations},title={#1}]%
 }}
 \newcommand{\printabbrevations}[1][کوته‌نوشت‌ها]{%
-	\IfFileExists{\jobname.acr}{\st@printabbrevations{#1}}{}%
+	\glsxtrifemptyglossary{abbreviations}{}{\st@printabbrevations{#1}}%
 }
 
 \eqcommand{رچ}{rl}

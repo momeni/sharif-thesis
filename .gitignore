@@ -33,5 +33,6 @@
 *.tdo
 *.bcf
 *.glsdefs
+*.glstex
 *.run.xml
 *~

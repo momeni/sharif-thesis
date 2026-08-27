@@ -1,0 +1,74 @@
+% Terms and abbreviations, read by \loadglossaryterms in general/glossaries.tex.
+%
+% Each @dualentry produces two entries: fa:<key> for the Persian to English
+% glossary and en:<key> for the English to Persian one. Cite them with \واژه.
+%
+% An existing glossary file written with \نوواژه can be converted with the
+% convertgls2bib tool which comes with bib2gls. Note that a key may not contain
+% a space, so a term of more than one word needs an explicit key, exactly as the
+% optional argument of \نوواژه already allowed.
+
+@dualentry{کلید,
+  name={نمونه},
+  description={example}
+}
+
+@dualentry{خودگرد,
+  name={خودگرد},
+  description={automata}
+}
+
+@dualentry{قالب,
+  name={قالب},
+  description={template}
+}
+
+@dualentry{پوشه,
+  name={پوشه},
+  description={folder}
+}
+
+@dualentry{پرونده,
+  name={پرونده},
+  description={file}
+}
+
+@dualentry{بسته,
+  name={بسته},
+  description={package}
+}
+
+@dualentry{vcs,
+  name={سامانه‌ی پایش نسخه‌ها},
+  description={version control system}
+}
+
+@dualentry{داده‌ساختار,
+  name={داده‌ساختار},
+  description={data structure}
+}
+
+@dualentry{os,
+  name={سامانه‌ی عامل},
+  description={operating system}
+}
+
+@dualentry{استانده,
+  name={استانده},
+  description={standard}
+}
+
+% Abbreviations are cited with \کوته‌نوشت and collected by \فهرست‌کوته‌نوشت‌ها.
+% long is the Persian wording used at the first mention; description is the
+% English wording shown in the list.
+@abbreviation{DOI,
+  short={DOI},
+  long={شناسه‌ی شیء دیجیتال},
+  description={Digital Object Identifier}
+}
+
+@abbreviation{ISO,
+  short={ISO},
+  long={سازمان بین‌المللی استاندارد},
+  description={International Organization for Standardization}
+}
