@@ -44,13 +44,18 @@ img/%.pdf img/%.pdf_tex: img/%.svg
 
 # Build the main file
 $(SRC).pdf: $(SRC).tex $(TEX0) $(BIB0) $(SVG0) $(SVGOUT) Makefile
-	rm -fv $(SRC).pdf $(SRC).bbl *.gls *.glo
+	rm -fv $(SRC).pdf $(SRC).bbl *.gls *.glo *.acn *.acr
 	$(TEX) $(TEXOPTIONS) $<
 	$(BIB) $(SRC)
 	#$(XINDY) -L persian -C utf8 -I xindy -M $(SRC) -t $(SRC).glg -o $(SRC).gls $(SRC).glo
 	# variant1: Sorts آ and ا together, variant2: Separates them.
 	$(XINDY) --language persian --codepage variant1-utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).fa.glg --out-file $(SRC).fa.gls $(SRC).fa.glo
 	$(XINDY) --language english --codepage utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).en.glg --out-file $(SRC).en.gls $(SRC).en.glo
+	# The abbreviations list. \makeglossaries always opens the .acn file, so the
+	# test is whether anything was written to it: a thesis that uses no
+	# abbreviations leaves it empty and must not get a .acr file, otherwise
+	# \printabbrevations would typeset an empty list.
+	@if [ -s $(SRC).acn ]; then $(XINDY) --language english --codepage utf8 --input-markup xindy --module $(SRC) --log-file $(SRC).alg --out-file $(SRC).acr $(SRC).acn; fi
 	#makeglossaries $(SRC)
 	$(TEX) $(TEXOPTIONS) $<
 	while grep --fixed-strings "Rerun to" $(SRC).log || grep --fixed-strings "Please rerun LaTeX" $(SRC).log ; do $(TEX) $(TEXOPTIONS) $< ; done
@@ -70,7 +75,7 @@ markdown: TODO.markdown
 cleanall: clean cleansvg cleanfig
 
 clean:
-	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
+	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls *.acn *.acr *.alg $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
 
 cleansvg:
 	rm -fv $(SVGOUT)
