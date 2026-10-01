@@ -19,6 +19,18 @@ $bibtex_use = 2;  # biber, via biblatex
 # variant1-utf8 sorts آ and ا together.
 add_cus_dep('glo', 'gls', 0, 'run_xindy');
 
+# The list of abbreviations is a separate glossary (main.acn -> main.acr) and is
+# now written in Persian, so it is sorted with the Persian language too.
+add_cus_dep('acn', 'acr', 0, 'run_xindy_abbrv');
+
+sub run_xindy_abbrv {
+    my ($base) = @_;
+    return system('xindy', '--language', 'persian', '--codepage', 'variant1-utf8',
+                  '--input-markup', 'xindy', '--module', $base,
+                  '--log-file', "$base.alg", '--out-file', "$base.acr",
+                  "$base.acn");
+}
+
 sub run_xindy {
     my ($base) = @_;
     my ($doc, $lang) = ($base, 'english');

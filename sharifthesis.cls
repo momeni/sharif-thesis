@@ -230,7 +230,7 @@
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
-\RequirePackage[xindy]{glossaries} % must be after hyperref for links.
+\RequirePackage[xindy,acronym]{glossaries} % must be after hyperref for links.
 
 \RequirePackage{harveyballs}
 
@@ -419,7 +419,7 @@
 }}
 
 % Reset the first-use flag of the transaltion glossareis
-\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms]}
+\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms,\acronymtype]}
 
 %\ترجمه[نمونه‌های]{نمونه}{example}
 \newcommand{\trans}[3][]{% params: [actual form]{persian}{english}
@@ -443,7 +443,72 @@
    \@nameuse{scr@tso@#1@pagenumberbox}}
   {}{\fail}
 
-%abbreviation support may be added here...
+% abbreviation support
+% The main text must stay in the Persian alphabet, so an abbreviation is given
+% in four parts: the Latin abbreviation and its Latin wording, which appear in
+% the footnote and the glossaries, and the Persian abbreviation and its Persian
+% wording, which appear in the text.
+%
+% \نوکوته‌نوشت{DOI}{Digital Object Identifier}{دی.اُ.آی.}{شناسه‌ی شیء دیجیتال}
+%
+% \کوته‌نوشت{DOI} then sets «شناسه‌ی شیء دیجیتال (دی.اُ.آی.)» with
+% «Digital Object Identifier (DOI)» in the footnote on first use, and
+% «دی.اُ.آی.» afterwards. Using it also files the pair in both glossaries and in
+% the list of abbreviations.
+\newif\if@stabbrv\@stabbrvfalse
+\newcommand{\newabbrv}[5][]{% params: [key]{abbreviation}{english}{کوته‌نوشت}{پارسی}
+\global\@stabbrvtrue%
+\ifthenelse{\isempty{#1}}{\def\key{#2}}{\def\key{#1}}%
+\newglossaryentry{fa:\key}{type={p2e-terms}, name={#5 (#4)}, text={#4},
+first={#5 (#4)}, description={#3 (\lr{#2})}}% persian glossary, and the text
+\newglossaryentry{en:\key}{type={e2p-terms}, name={#3 (\lr{#2})},
+description={#5 (#4)}}% english glossary
+\newglossaryentry{ac:\key}{type={\acronymtype}, sort={#4}, name={#4},
+description={\protect\abbrvlistentry{#5}{#3}}}% the list of abbreviations
+}
+
+% How one line of the list of abbreviations reads, given the Persian wording and
+% the English one. The default keeps the English in brackets. For a list with no
+% Latin in it at all:
+%   \renewcommand{\abbrvlistentry}[2]{#1}
+\newcommand{\abbrvlistentry}[2]{#1 (\lr{#2})}
+
+%\کوته‌نوشت{DOI}
+\newcommand{\abbrv}[2][]{%
+\glsadd{en:#2}\glsadd{ac:#2}%
+\ifthenelse{\isempty{#1}}{\gls{fa:#2}}{\gls{fa:#2}[#1]}%
+}
+
+\newglossarystyle{abbreviations}{%
+	\renewenvironment{theglossary}%
+		{\begingroup\raggedleft}%
+		{\endgroup}%
+	\renewcommand*{\glossaryheader}{}%
+	\renewcommand*{\glsgroupheading}[1]{}%
+	\renewcommand*{\glsgroupskip}{}%
+	% \glossentry{label}{numberlist}
+	\renewcommand*{\glossentry}[2]{%
+		\glstarget{##1}{\glossentryname{##1}}% the Persian abbreviation
+		\dotfill%dots
+		\space \glossentrydesc{##1} \\% its Persian and Latin wording
+	}%
+	\renewcommand*{\subglossentry}[3]{%
+		\glossentry{##2}{##3}%
+	}%
+}
+
+\newcommand{\st@printabbrevations}[1]{{%
+	\phantomsection % hyperref: enable hyperlinking from the table of contents to this point
+	\addcontentsline{toc}{chapter}{#1}%
+	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
+	\printglossary[type=\acronymtype,style={abbreviations},title={#1}]%
+}}
+% A thesis which declares no abbreviation gets neither a heading nor a line in
+% the table of contents. The test is the declaration rather than the .acr file,
+% because latexmk only builds that file once the document has asked for it.
+\newcommand{\printabbrevations}[1][کوته‌نوشت‌ها]{%
+	\if@stabbrv\st@printabbrevations{#1}\fi%
+}
 
 \eqcommand{رچ}{rl}
 \eqcommand{چر}{lr}
@@ -456,6 +521,9 @@
 \eqcommand{نوواژه}{newterm}
 \eqcommand{واژه}{term}
 \eqcommand{ترجمه}{trans}
+\eqcommand{نوکوته‌نوشت}{newabbrv}
+\eqcommand{کوته‌نوشت}{abbrv}
+\eqcommand{فهرست‌کوته‌نوشت‌ها}{printabbrevations}
 %مورد زیر در xepersian تعریف شده و نیازی به تعریف دوباره‌ی آن در اینجا نیست.
 %\eqcommand{نام}{name}
 
