@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+download() {
+  local url="$1"
+  local dst="$2"
+  python3 -c "import urllib.request; urllib.request.urlretrieve(\"$url\", \"$dst\")"
+}
+
 font_url() {
   echo "https://fontlibrary.org/assets/downloads/$1/$2/$1.zip"
 }
@@ -14,7 +20,7 @@ install_font() {
     url="$(font_url "$name" "$hash")"
   fi
   local font_file="/tmp/${name}.zip"
-  wget -q -O "$font_file" "$url"
+  download "$url" "$font_file"
   [ "$(md5sum "$font_file" | cut -d' ' -f1)" = "$hash" ] || (echo "Failed to download $name" && exit 1)
   unzip -q -o "$font_file" -d "/usr/share/fonts/truetype/${name}/"
   echo "Installed $name font."
