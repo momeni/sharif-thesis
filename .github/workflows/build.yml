@@ -1,0 +1,37 @@
+name: Build Sharif Thesis on texlive:TL2025 and texlive:latest
+
+on: [push, pull_request]
+
+jobs:
+  # Pinned TeX Live version; expected to pass.
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:TL2025-historic
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install required fonts
+        run: bash .github/ci/install-fonts.sh
+
+      - name: Build by Makefile
+        run: make
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdf-output
+          path: main.pdf
+
+  # Latest TeX Live version; may fail as an early warning
+  # when a new TeX Live version breaks the template.
+  latest:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install required fonts
+        run: bash .github/ci/install-fonts.sh
+
+      - name: Build by Makefile
+        run: make
