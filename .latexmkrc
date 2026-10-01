@@ -10,6 +10,7 @@ $pdf_mode = 5;    # xelatex
 $xelatex = 'xelatex -halt-on-error -shell-escape -interaction=nonstopmode '
          . '-synctex=-1 -output-driver="xdvipdfmx -E -V 5" %O %S';
 
+$bibtex = 'biber';
 $bibtex_use = 2;  # biber, via biblatex
 
 # The glossaries are sorted by xindy, which latexmk knows nothing about. The two
