@@ -311,17 +311,24 @@
 
 \glsdisablehyper % disable hyperlinks
 
+\newlength{\persianwidth}
 \newglossarystyle{persian-to-english}{%
 %	\glossarystyle{listdotted}% the base style
 	\renewenvironment{theglossary}%
-		{\begin{multicols}{2}\begingroup \flushleft \linespread{1.8}\selectfont}%
+		{\begin{multicols}{2}\begingroup\flushleft\linespread{1.8}\selectfont}%
 		{\endgroup \end{multicols}}%
 	\renewcommand*{\glossaryheader}{}%
 	\renewcommand*{\glsgroupheading}[1]{}%
 	\renewcommand*{\glsgroupskip}{}%
 	% \glossentry{label}{numberlist}
 	\renewcommand*{\glossentry}[2]{%
-		\glstarget{##1}{\glossentryname{##1}}% persian term
+		\settowidth{\persianwidth}{\glossentryname{##1}}%
+		\ifdim\persianwidth>\columnwidth
+			\setlength{\persianwidth}{\columnwidth}%
+		\fi%
+		\parbox[t]{\persianwidth}{%
+			\glstarget{##1}{\glossentryname{##1}}\dotfill% persian term
+		}%
 		\dotfill%dots
 		\space \lr{\glossentrydesc{##1}} \\%translation term
 	}%
@@ -329,18 +336,25 @@
 		\glossentry{##2}{##3}%
 	}%
 }
+\newlength{\englishwidth}
 \newglossarystyle{english-to-persian}{%
 	\renewenvironment{theglossary}%
-		{\begin{multicols}{2}\begingroup \flushright \linespread{1.8}\selectfont}%
+		{\begin{multicols}{2}\begingroup\flushright\linespread{1.8}\selectfont}%
 		{\endgroup \end{multicols}}%
 	\renewcommand*{\glossaryheader}{}%
 	\renewcommand*{\glsgroupheading}[1]{}%
 	\renewcommand*{\glsgroupskip}{}%
 	% \glossentry{label}{numberlist}
 	\renewcommand*{\glossentry}[2]{%
-		\glstarget{##1}{\glossentryname{##1}}% translation term
+		\settowidth{\englishwidth}{\glossentryname{##1}}%
+		\ifdim\englishwidth>\columnwidth
+			\setlength{\englishwidth}{\columnwidth}%
+		\fi%
+		\parbox[t]{\englishwidth}{%
+			\glstarget{##1}{\glossentryname{##1}}\dotfill% english term
+		}% translation term
 		\dotfill%dots
-		\space \rl{\glossentrydesc{##1}} \\% persian term
+		\space{\rl{\glossentrydesc{##1}}} \\% persian term
 	}%
 	\renewcommand*{\subglossentry}[3]{%
 		\glossentry{##2}{##3}%
