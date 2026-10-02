@@ -474,18 +474,23 @@
 \global\@stabbrvtrue%
 \ifthenelse{\isempty{#1}}{\def\key{#2}}{\def\key{#1}}%
 \newglossaryentry{fa:\key}{type={p2e-terms}, name={#5 (#4)}, text={#4},
-first={#5 (#4)}, description={#3 (\lr{#2})}}% persian glossary, and the text
-\newglossaryentry{en:\key}{type={e2p-terms}, name={#3 (\lr{#2})},
+first={#5 (#4)}, description={#3 (#2)}}% persian glossary, and the text
+\newglossaryentry{en:\key}{type={e2p-terms}, name={#3 (#2)},
 description={#5 (#4)}}% english glossary
 \newglossaryentry{ac:\key}{type={\acronymtype}, sort={#4}, name={#4},
-description={\protect\abbrvlistentry{#5}{#3}}}% the list of abbreviations
+description={\protect\abbrvlistentry{#2}{#3}{#5}}}% the list of abbreviations
 }
 
-% How one line of the list of abbreviations reads, given the Persian wording and
-% the English one. The default keeps the English in brackets. For a list with no
-% Latin in it at all:
-%   \renewcommand{\abbrvlistentry}[2]{#1}
-\newcommand{\abbrvlistentry}[2]{#1 (\lr{#2})}
+% How the description of a Persian abbreviated form is rendered,
+% having access to the three arguments of English abbreviated and full texts
+% and Persian full text, respectively.
+%   \abbrvlistentry{DOI}{Digital Object Identifier}{شناسه‌ی شیء دیجیتال}
+% The default shows both of the English and Persian full texts.
+\newcommand{\abbrvlistentry}[3]{\rl{#3} \lr{(#2)}}
+% For a list with no Latin alphabet in it, use:
+%   \renewcommand{\abbrvlistentry}[3]{\rl{#3}}
+% In order to show them all
+%   \renewcommand{\abbrvlistentry}[3]{\rl{#3} \dotfill \lr{#2} \dotfill \lr{#1}}
 
 %\کوته‌نوشت{DOI}
 \newcommand{\abbrv}[2][]{%
@@ -512,8 +517,8 @@ description={\protect\abbrvlistentry{#5}{#3}}}% the list of abbreviations
 }
 
 \newcommand{\st@printabbrevations}[1]{{%
-	\phantomsection % hyperref: enable hyperlinking from the table of contents to this point
-	\addcontentsline{toc}{chapter}{#1}%
+	\phantomsection % hyperref: enable hyperlinking to this point
+	%\addcontentsline{toc}{chapter}{#1}% must not be included in the TOC
 	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
 	\printglossary[type=\acronymtype,style={abbreviations},title={#1}]%
 }}
