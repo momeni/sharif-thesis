@@ -65,7 +65,7 @@ cleanall: clean cleansvg cleanfig
 
 clean:
 	-$(LATEXMK) -C
-	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
+	rm -fv $(SRC).pdf *.log *.aux *.auxlock *.bbl *.bcf *.glsdefs *.run.xml *.blg *.out *.dvi *.synctex *.toc *.lof *.lot *.maf *.mtc* *.glg *.glo *.gls *.acn *.acr *.alg $(SRC).xdy *~ images/*~ $(SRC)-gnuplottex-fig* *.dep *.dpth $(SRC)-figure*.xdy */*.aux
 
 cleansvg:
 	rm -fv $(SVGOUT)

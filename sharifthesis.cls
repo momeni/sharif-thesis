@@ -230,7 +230,7 @@
 \RequirePackage{subcaption}
 \RequirePackage[all]{hypcap} % fix hyperref to point to the figure/table instead of its caption. Must be loaded after hyperref and subcaption.
 
-\RequirePackage[xindy]{glossaries} % must be after hyperref for links.
+\RequirePackage[xindy,acronym]{glossaries} % must be after hyperref for links.
 
 \RequirePackage{harveyballs}
 
@@ -311,17 +311,24 @@
 
 \glsdisablehyper % disable hyperlinks
 
+\newlength{\persianwidth}
 \newglossarystyle{persian-to-english}{%
 %	\glossarystyle{listdotted}% the base style
 	\renewenvironment{theglossary}%
-		{\begin{multicols}{2}\begingroup \flushleft \linespread{1.8}\selectfont}%
+		{\begin{multicols}{2}\begingroup\flushleft\linespread{1.8}\selectfont}%
 		{\endgroup \end{multicols}}%
 	\renewcommand*{\glossaryheader}{}%
 	\renewcommand*{\glsgroupheading}[1]{}%
 	\renewcommand*{\glsgroupskip}{}%
 	% \glossentry{label}{numberlist}
 	\renewcommand*{\glossentry}[2]{%
-		\glstarget{##1}{\glossentryname{##1}}% persian term
+		\settowidth{\persianwidth}{\glossentryname{##1}}%
+		\ifdim\persianwidth>\columnwidth
+			\setlength{\persianwidth}{\columnwidth}%
+		\fi%
+		\parbox[t]{\persianwidth}{%
+			\glstarget{##1}{\glossentryname{##1}}\dotfill% persian term
+		}%
 		\dotfill%dots
 		\space \lr{\glossentrydesc{##1}} \\%translation term
 	}%
@@ -329,18 +336,25 @@
 		\glossentry{##2}{##3}%
 	}%
 }
+\newlength{\englishwidth}
 \newglossarystyle{english-to-persian}{%
 	\renewenvironment{theglossary}%
-		{\begin{multicols}{2}\begingroup \flushright \linespread{1.8}\selectfont}%
+		{\begin{multicols}{2}\begingroup\flushright\linespread{1.8}\selectfont}%
 		{\endgroup \end{multicols}}%
 	\renewcommand*{\glossaryheader}{}%
 	\renewcommand*{\glsgroupheading}[1]{}%
 	\renewcommand*{\glsgroupskip}{}%
 	% \glossentry{label}{numberlist}
 	\renewcommand*{\glossentry}[2]{%
-		\glstarget{##1}{\glossentryname{##1}}% translation term
+		\settowidth{\englishwidth}{\glossentryname{##1}}%
+		\ifdim\englishwidth>\columnwidth
+			\setlength{\englishwidth}{\columnwidth}%
+		\fi%
+		\parbox[t]{\englishwidth}{%
+			\glstarget{##1}{\glossentryname{##1}}\dotfill% english term
+		}% translation term
 		\dotfill%dots
-		\space \rl{\glossentrydesc{##1}} \\% persian term
+		\space{\rl{\glossentrydesc{##1}}} \\% persian term
 	}%
 	\renewcommand*{\subglossentry}[3]{%
 		\glossentry{##2}{##3}%
@@ -419,7 +433,7 @@
 }}
 
 % Reset the first-use flag of the transaltion glossareis
-\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms]}
+\newcommand{\resettranslations}{\glsresetall[e2p-terms,p2e-terms,\acronymtype]}
 
 %\ترجمه[نمونه‌های]{نمونه}{example}
 \newcommand{\trans}[3][]{% params: [actual form]{persian}{english}
@@ -443,7 +457,77 @@
    \@nameuse{scr@tso@#1@pagenumberbox}}
   {}{\fail}
 
-%abbreviation support may be added here...
+% abbreviation support
+% The main text must stay in the Persian alphabet, so an abbreviation is given
+% in four parts: the Latin abbreviation and its Latin wording, which appear in
+% the footnote and the glossaries, and the Persian abbreviation and its Persian
+% wording, which appear in the text.
+%
+% \نوکوته‌نوشت{DOI}{Digital Object Identifier}{دی.اُ.آی.}{شناسه‌ی شیء دیجیتال}
+%
+% \کوته‌نوشت{DOI} then sets «شناسه‌ی شیء دیجیتال (دی.اُ.آی.)» with
+% «Digital Object Identifier (DOI)» in the footnote on first use, and
+% «دی.اُ.آی.» afterwards. Using it also files the pair in both glossaries and in
+% the list of abbreviations.
+\newif\if@stabbrv\@stabbrvfalse
+\newcommand{\newabbrv}[5][]{% params: [key]{abbreviation}{english}{کوته‌نوشت}{پارسی}
+\global\@stabbrvtrue%
+\ifthenelse{\isempty{#1}}{\def\key{#2}}{\def\key{#1}}%
+\newglossaryentry{fa:\key}{type={p2e-terms}, name={#5 (#4)}, text={#4},
+first={#5 (#4)}, description={#3 (#2)}}% persian glossary, and the text
+\newglossaryentry{en:\key}{type={e2p-terms}, name={#3 (#2)},
+description={#5 (#4)}}% english glossary
+\newglossaryentry{ac:\key}{type={\acronymtype}, sort={#4}, name={#4},
+description={\protect\abbrvlistentry{#2}{#3}{#5}}}% the list of abbreviations
+}
+
+% How the description of a Persian abbreviated form is rendered,
+% having access to the three arguments of English abbreviated and full texts
+% and Persian full text, respectively.
+%   \abbrvlistentry{DOI}{Digital Object Identifier}{شناسه‌ی شیء دیجیتال}
+% The default shows both of the English and Persian full texts.
+\newcommand{\abbrvlistentry}[3]{\rl{#3} \lr{(#2)}}
+% For a list with no Latin alphabet in it, use:
+%   \renewcommand{\abbrvlistentry}[3]{\rl{#3}}
+% In order to show them all
+%   \renewcommand{\abbrvlistentry}[3]{\rl{#3} \dotfill \lr{#2} \dotfill \lr{#1}}
+
+%\کوته‌نوشت{DOI}
+\newcommand{\abbrv}[2][]{%
+\glsadd{en:#2}\glsadd{ac:#2}%
+\ifthenelse{\isempty{#1}}{\gls{fa:#2}}{\gls{fa:#2}[#1]}%
+}
+
+\newglossarystyle{abbreviations}{%
+	\renewenvironment{theglossary}%
+		{\begingroup\raggedleft}%
+		{\endgroup}%
+	\renewcommand*{\glossaryheader}{}%
+	\renewcommand*{\glsgroupheading}[1]{}%
+	\renewcommand*{\glsgroupskip}{}%
+	% \glossentry{label}{numberlist}
+	\renewcommand*{\glossentry}[2]{%
+		\glstarget{##1}{\glossentryname{##1}}% the Persian abbreviation
+		\dotfill%dots
+		\space \glossentrydesc{##1} \\% its Persian and Latin wording
+	}%
+	\renewcommand*{\subglossentry}[3]{%
+		\glossentry{##2}{##3}%
+	}%
+}
+
+\newcommand{\st@printabbrevations}[1]{{%
+	\phantomsection % hyperref: enable hyperlinking to this point
+	%\addcontentsline{toc}{chapter}{#1}% must not be included in the TOC
+	\renewcommand{\glossarymark}[1]{\markboth{##1}}% correct handling of page header
+	\printglossary[type=\acronymtype,style={abbreviations},title={#1}]%
+}}
+% A thesis which declares no abbreviation gets neither a heading nor a line in
+% the table of contents. The test is the declaration rather than the .acr file,
+% because latexmk only builds that file once the document has asked for it.
+\newcommand{\printabbrevations}[1][کوته‌نوشت‌ها]{%
+	\if@stabbrv\st@printabbrevations{#1}\fi%
+}
 
 \eqcommand{رچ}{rl}
 \eqcommand{چر}{lr}
@@ -456,6 +540,9 @@
 \eqcommand{نوواژه}{newterm}
 \eqcommand{واژه}{term}
 \eqcommand{ترجمه}{trans}
+\eqcommand{نوکوته‌نوشت}{newabbrv}
+\eqcommand{کوته‌نوشت}{abbrv}
+\eqcommand{فهرست‌کوته‌نوشت‌ها}{printabbrevations}
 %مورد زیر در xepersian تعریف شده و نیازی به تعریف دوباره‌ی آن در اینجا نیست.
 %\eqcommand{نام}{name}
 
